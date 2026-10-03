@@ -33,7 +33,7 @@ class PostVoiceMetricsInterpreterBody:
         thread_id (str | Unset): Optional. Azure AI Foundry thread ID for multi-turn continuity.
         praat_results (PostVoiceMetricsInterpreterBodyPraatResults | Unset): Optional. Full Praat output object — when
             present, the server merges F0 / expected-range fields into the metrics for richer interpretation.
-        email (str | Unset): Optional. Used by anonymous-key validation flow.
+        email (str | Unset): Optional. Used by the credit-validation flow.
     """
 
     metrics: PostVoiceMetricsInterpreterBodyMetrics

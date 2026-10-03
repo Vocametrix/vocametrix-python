@@ -24,7 +24,7 @@ class PostFrenchToIpaAgentBody:
         phonetic_input (list[PostFrenchToIpaAgentBodyPhoneticInputItem]): REQUIRED. Either a single French word as a
             string, OR a JSON-stringified array of up to 20 strings. The server detects which by attempting JSON.parse.
         thread_id (str | Unset): Optional. Thread ID for multi-turn continuity.
-        email (str | Unset): Optional. Used by anonymous-key validation flow.
+        email (str | Unset): Optional. Used by the credit-validation flow.
     """
 
     phonetic_input: list[PostFrenchToIpaAgentBodyPhoneticInputItem]

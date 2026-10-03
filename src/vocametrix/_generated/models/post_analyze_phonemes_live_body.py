@@ -22,8 +22,10 @@ class PostAnalyzePhonemesLiveBody:
         reference_word (str | Unset): Optional. Currently accepted by the API but not used by the JavaScript layer
             (passed through to the Python script which may use it).
         language (str | Unset): Optional, default "fr-FR". Accepted: "fr-FR" | "et-EE".
-        model (str | Unset): Optional. Alias for an alternative ASR model (must pass server-side `isKnownAlias`).
-            Resolved to a model URL internally.
+        model (str | Unset): Optional, French only. `short-words-champion` (isolated short words, recommended),
+            `logatome-champion` (logatomes / nonsense syllables), or omit for the CNAM wav2vec2-french-phonemizer-v2
+            baseline (continuous speech). Must be a known alias (server-side `isKnownAlias`) — an unknown alias returns 400.
+            Resolved to a model blob URL internally, never exposed to the client.
         keep_blob (str | Unset): Optional, default false. If false and `blobUrl` was used, the source blob is deleted
             after success (only when hosted on the Vocametrix storage account).
     """

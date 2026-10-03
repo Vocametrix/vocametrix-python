@@ -39,7 +39,6 @@ class PostVoiceMetricsInterpreterResponse200:
             metricsProcessed, threadId, agentName, processingTimeSeconds, timestamp, genderValidation: {detectedF0,
             expectedRange, f0Validity, note} | null }.
         remaining_credits (float | Unset): Number.
-        is_anonymous_session (bool | Unset): Boolean — true if the call used an anonymous_<sessionId> key.
     """
 
     success: bool | Unset = UNSET
@@ -51,7 +50,6 @@ class PostVoiceMetricsInterpreterResponse200:
     interpretation: PostVoiceMetricsInterpreterResponse200Interpretation | Unset = UNSET
     metadata: PostVoiceMetricsInterpreterResponse200Metadata | Unset = UNSET
     remaining_credits: float | Unset = UNSET
-    is_anonymous_session: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -78,8 +76,6 @@ class PostVoiceMetricsInterpreterResponse200:
 
         remaining_credits = self.remaining_credits
 
-        is_anonymous_session = self.is_anonymous_session
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
@@ -97,8 +93,6 @@ class PostVoiceMetricsInterpreterResponse200:
             field_dict["metadata"] = metadata
         if remaining_credits is not UNSET:
             field_dict["remaining_credits"] = remaining_credits
-        if is_anonymous_session is not UNSET:
-            field_dict["isAnonymousSession"] = is_anonymous_session
 
         return field_dict
 
@@ -154,8 +148,6 @@ class PostVoiceMetricsInterpreterResponse200:
 
         remaining_credits = d.pop("remaining_credits", UNSET)
 
-        is_anonymous_session = d.pop("isAnonymousSession", UNSET)
-
         post_voice_metrics_interpreter_response_200 = cls(
             success=success,
             overall_score=overall_score,
@@ -164,7 +156,6 @@ class PostVoiceMetricsInterpreterResponse200:
             interpretation=interpretation,
             metadata=metadata,
             remaining_credits=remaining_credits,
-            is_anonymous_session=is_anonymous_session,
         )
 
         post_voice_metrics_interpreter_response_200.additional_properties = d

@@ -32,14 +32,12 @@ class PostSyntaxCheckerAgentResponse200:
         metadata (PostSyntaxCheckerAgentResponse200Metadata | Unset): Object: { locale, textLength, threadId, agentName,
             processingTimeSeconds, timestamp }.
         remaining_credits (float | Unset): Number.
-        is_anonymous_session (bool | Unset): Boolean.
     """
 
     success: bool | Unset = UNSET
     analysis: PostSyntaxCheckerAgentResponse200Analysis | Unset = UNSET
     metadata: PostSyntaxCheckerAgentResponse200Metadata | Unset = UNSET
     remaining_credits: float | Unset = UNSET
-    is_anonymous_session: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -55,8 +53,6 @@ class PostSyntaxCheckerAgentResponse200:
 
         remaining_credits = self.remaining_credits
 
-        is_anonymous_session = self.is_anonymous_session
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
@@ -68,8 +64,6 @@ class PostSyntaxCheckerAgentResponse200:
             field_dict["metadata"] = metadata
         if remaining_credits is not UNSET:
             field_dict["remaining_credits"] = remaining_credits
-        if is_anonymous_session is not UNSET:
-            field_dict["isAnonymousSession"] = is_anonymous_session
 
         return field_dict
 
@@ -101,14 +95,11 @@ class PostSyntaxCheckerAgentResponse200:
 
         remaining_credits = d.pop("remaining_credits", UNSET)
 
-        is_anonymous_session = d.pop("isAnonymousSession", UNSET)
-
         post_syntax_checker_agent_response_200 = cls(
             success=success,
             analysis=analysis,
             metadata=metadata,
             remaining_credits=remaining_credits,
-            is_anonymous_session=is_anonymous_session,
         )
 
         post_syntax_checker_agent_response_200.additional_properties = d

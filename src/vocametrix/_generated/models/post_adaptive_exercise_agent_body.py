@@ -20,7 +20,7 @@ class PostAdaptiveExerciseAgentBody:
             insensitive). Other values return 400 with a `validProfiles` field.
         include_tips (str | Unset): Optional, default false. If true, the agent includes practitioner tips alongside the
             adapted exercise.
-        email (str | Unset): Optional. Used by anonymous-key validation flow.
+        email (str | Unset): Optional. Used by the credit-validation flow.
     """
 
     exercise_text: str

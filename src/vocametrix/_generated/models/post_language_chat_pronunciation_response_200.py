@@ -25,7 +25,6 @@ class PostLanguageChatPronunciationResponse200:
         thread_id (str | Unset): Thread ID.
         run_status (str | Unset): Run status string.
         remaining_credits (float | Unset): Number.
-        is_anonymous_session (bool | Unset): Boolean.
         configuration (PostLanguageChatPronunciationResponse200Configuration | Unset): Object — passthrough of resolved
             language, nativeLanguage, ageLevel, topic.
     """
@@ -34,7 +33,6 @@ class PostLanguageChatPronunciationResponse200:
     thread_id: str | Unset = UNSET
     run_status: str | Unset = UNSET
     remaining_credits: float | Unset = UNSET
-    is_anonymous_session: bool | Unset = UNSET
     configuration: PostLanguageChatPronunciationResponse200Configuration | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -46,8 +44,6 @@ class PostLanguageChatPronunciationResponse200:
         run_status = self.run_status
 
         remaining_credits = self.remaining_credits
-
-        is_anonymous_session = self.is_anonymous_session
 
         configuration: dict[str, Any] | Unset = UNSET
         if not isinstance(self.configuration, Unset):
@@ -64,8 +60,6 @@ class PostLanguageChatPronunciationResponse200:
             field_dict["runStatus"] = run_status
         if remaining_credits is not UNSET:
             field_dict["remaining_credits"] = remaining_credits
-        if is_anonymous_session is not UNSET:
-            field_dict["isAnonymousSession"] = is_anonymous_session
         if configuration is not UNSET:
             field_dict["configuration"] = configuration
 
@@ -86,8 +80,6 @@ class PostLanguageChatPronunciationResponse200:
 
         remaining_credits = d.pop("remaining_credits", UNSET)
 
-        is_anonymous_session = d.pop("isAnonymousSession", UNSET)
-
         _configuration = d.pop("configuration", UNSET)
         configuration: PostLanguageChatPronunciationResponse200Configuration | Unset
         if isinstance(_configuration, Unset):
@@ -102,7 +94,6 @@ class PostLanguageChatPronunciationResponse200:
             thread_id=thread_id,
             run_status=run_status,
             remaining_credits=remaining_credits,
-            is_anonymous_session=is_anonymous_session,
             configuration=configuration,
         )
 
