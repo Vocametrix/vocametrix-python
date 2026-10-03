@@ -27,6 +27,8 @@ class GetCalculateSpectralAdvancedResponse200:
         spectral_flux (float | Unset): Rate of spectral change in Hz. Example: 234.6
         ltas_slope (float | Unset): Spectral slope 0-1 kHz vs 1-4 kHz in dB/octave. Example: -12.4
         ltas_tilt (float | Unset): Trend line slope across 1-4 kHz in dB/octave. Example: -8.9
+        ltas_curve (float | Unset): Full Long-Term Average Spectrum as freq/dB pairs, 80-4000 Hz in 100 Hz steps.
+            Example: [{"freq":80,"db":-25.3}, ...]
         mean_f0 (float | Unset): Mean fundamental frequency in Hz. Example: 195.8
         f1_mean (float | Unset): Mean first formant frequency in Hz. Example: 685.4
         f2_mean (float | Unset): Mean second formant frequency in Hz. Example: 1247.8
@@ -61,6 +63,7 @@ class GetCalculateSpectralAdvancedResponse200:
     spectral_flux: float | Unset = UNSET
     ltas_slope: float | Unset = UNSET
     ltas_tilt: float | Unset = UNSET
+    ltas_curve: float | Unset = UNSET
     mean_f0: float | Unset = UNSET
     f1_mean: float | Unset = UNSET
     f2_mean: float | Unset = UNSET
@@ -106,6 +109,8 @@ class GetCalculateSpectralAdvancedResponse200:
         ltas_slope = self.ltas_slope
 
         ltas_tilt = self.ltas_tilt
+
+        ltas_curve = self.ltas_curve
 
         mean_f0 = self.mean_f0
 
@@ -172,6 +177,8 @@ class GetCalculateSpectralAdvancedResponse200:
             field_dict["LTAS_SLOPE"] = ltas_slope
         if ltas_tilt is not UNSET:
             field_dict["LTAS_TILT"] = ltas_tilt
+        if ltas_curve is not UNSET:
+            field_dict["LTAS_CURVE"] = ltas_curve
         if mean_f0 is not UNSET:
             field_dict["MEAN_F0"] = mean_f0
         if f1_mean is not UNSET:
@@ -240,6 +247,8 @@ class GetCalculateSpectralAdvancedResponse200:
 
         ltas_tilt = d.pop("LTAS_TILT", UNSET)
 
+        ltas_curve = d.pop("LTAS_CURVE", UNSET)
+
         mean_f0 = d.pop("MEAN_F0", UNSET)
 
         f1_mean = d.pop("F1_MEAN", UNSET)
@@ -291,6 +300,7 @@ class GetCalculateSpectralAdvancedResponse200:
             spectral_flux=spectral_flux,
             ltas_slope=ltas_slope,
             ltas_tilt=ltas_tilt,
+            ltas_curve=ltas_curve,
             mean_f0=mean_f0,
             f1_mean=f1_mean,
             f2_mean=f2_mean,

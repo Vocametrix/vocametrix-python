@@ -26,14 +26,12 @@ class PostAdaptiveExerciseAgentResponse200:
         metadata (PostAdaptiveExerciseAgentResponse200Metadata | Unset): Object: { profile, includeTips, threadId,
             agentName, processingTimeSeconds, timestamp }.
         remaining_credits (float | Unset): Number.
-        is_anonymous_session (bool | Unset): Boolean.
     """
 
     success: bool | Unset = UNSET
     adapted_html: str | Unset = UNSET
     metadata: PostAdaptiveExerciseAgentResponse200Metadata | Unset = UNSET
     remaining_credits: float | Unset = UNSET
-    is_anonymous_session: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -47,8 +45,6 @@ class PostAdaptiveExerciseAgentResponse200:
 
         remaining_credits = self.remaining_credits
 
-        is_anonymous_session = self.is_anonymous_session
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
@@ -60,8 +56,6 @@ class PostAdaptiveExerciseAgentResponse200:
             field_dict["metadata"] = metadata
         if remaining_credits is not UNSET:
             field_dict["remaining_credits"] = remaining_credits
-        if is_anonymous_session is not UNSET:
-            field_dict["isAnonymousSession"] = is_anonymous_session
 
         return field_dict
 
@@ -85,14 +79,11 @@ class PostAdaptiveExerciseAgentResponse200:
 
         remaining_credits = d.pop("remaining_credits", UNSET)
 
-        is_anonymous_session = d.pop("isAnonymousSession", UNSET)
-
         post_adaptive_exercise_agent_response_200 = cls(
             success=success,
             adapted_html=adapted_html,
             metadata=metadata,
             remaining_credits=remaining_credits,
-            is_anonymous_session=is_anonymous_session,
         )
 
         post_adaptive_exercise_agent_response_200.additional_properties = d

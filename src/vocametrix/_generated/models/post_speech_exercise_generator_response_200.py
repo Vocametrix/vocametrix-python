@@ -20,7 +20,6 @@ class PostSpeechExerciseGeneratorResponse200:
         agent_name (str | Unset): Identifier of the agent that produced the reply
         run_status (str | Unset): Internal run state (e.g., "completed")
         remaining_credits (float | Unset): Number of API credits remaining in your account
-        is_anonymous_session (bool | Unset): Boolean — true if the call used an anonymous_<sessionId> key
         parameters (str | Unset): Echo of the parameters used to produce the reply (ageLevel, speechChallenge, language)
     """
 
@@ -29,7 +28,6 @@ class PostSpeechExerciseGeneratorResponse200:
     agent_name: str | Unset = UNSET
     run_status: str | Unset = UNSET
     remaining_credits: float | Unset = UNSET
-    is_anonymous_session: bool | Unset = UNSET
     parameters: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -43,8 +41,6 @@ class PostSpeechExerciseGeneratorResponse200:
         run_status = self.run_status
 
         remaining_credits = self.remaining_credits
-
-        is_anonymous_session = self.is_anonymous_session
 
         parameters = self.parameters
 
@@ -61,8 +57,6 @@ class PostSpeechExerciseGeneratorResponse200:
             field_dict["runStatus"] = run_status
         if remaining_credits is not UNSET:
             field_dict["remaining_credits"] = remaining_credits
-        if is_anonymous_session is not UNSET:
-            field_dict["isAnonymousSession"] = is_anonymous_session
         if parameters is not UNSET:
             field_dict["parameters"] = parameters
 
@@ -81,8 +75,6 @@ class PostSpeechExerciseGeneratorResponse200:
 
         remaining_credits = d.pop("remaining_credits", UNSET)
 
-        is_anonymous_session = d.pop("isAnonymousSession", UNSET)
-
         parameters = d.pop("parameters", UNSET)
 
         post_speech_exercise_generator_response_200 = cls(
@@ -91,7 +83,6 @@ class PostSpeechExerciseGeneratorResponse200:
             agent_name=agent_name,
             run_status=run_status,
             remaining_credits=remaining_credits,
-            is_anonymous_session=is_anonymous_session,
             parameters=parameters,
         )
 

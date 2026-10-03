@@ -30,7 +30,7 @@ class PostTherapyPlanningAgentBody:
             (typically `{disfluency_types_detected, overall_fluency_rate, total_segments, ...}`).
         patient_anamnesis (str | Unset): Optional. Patient context — `demographics: {age}`, `clinical_history:
             {diagnosis, severity}`, `therapy_information: {current_treatment_approach, total_sessions_completed}`, etc.
-        email (str | Unset): Optional. Used by anonymous-key validation flow.
+        email (str | Unset): Optional. Used by the credit-validation flow.
     """
 
     session_metadata: PostTherapyPlanningAgentBodySessionMetadata

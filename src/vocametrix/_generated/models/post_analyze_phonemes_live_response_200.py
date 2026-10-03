@@ -1,12 +1,21 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.post_analyze_phonemes_live_response_200_phoneme_timings_item import (
+        PostAnalyzePhonemesLiveResponse200PhonemeTimingsItem,
+    )
+    from ..models.post_analyze_phonemes_live_response_200_phonemes_item import (
+        PostAnalyzePhonemesLiveResponse200PhonemesItem,
+    )
+
 
 T = TypeVar("T", bound="PostAnalyzePhonemesLiveResponse200")
 
@@ -15,33 +24,144 @@ T = TypeVar("T", bound="PostAnalyzePhonemesLiveResponse200")
 class PostAnalyzePhonemesLiveResponse200:
     """
     Attributes:
-        python_output (str | Unset): JSON shape produced by the underlying phoneme client. Typical fields: `phonemes: [{
-            label, start_ms, end_ms, confidence }, ...]`, `language`, `model_used`. Exact shape is not enumerated by the JS
-            layer and is determined by the per-language Python client (see python/phonemes/french/phoneme_client.py and
-            python/phonemes/estonian/phoneme_client.py).
+        success (bool | Unset): Boolean — true when analysis completed (including the empty-result "Silence detected"
+            case).
+        status (str | Unset): "completed" on success.
+        message (str | Unset): Descriptive message, e.g. "Analysis completed successfully" or "Silence detected".
+        language (str | Unset): Echoed language code processed.
+        transcription (str | Unset): Space-separated sequence of detected phonemes (empty string if silence).
+        phoneme_count (float | Unset): Total number of phonemes detected.
+        phonemes (list[PostAnalyzePhonemesLiveResponse200PhonemesItem] | Unset): Array of the phoneme labels detected,
+            in order.
+        phoneme_timings (list[PostAnalyzePhonemesLiveResponse200PhonemeTimingsItem] | Unset): Array of `{ phoneme,
+            start, end, duration, confidence, second_phoneme, second_confidence }` — one entry per phoneme.
+            `second_phoneme`/`second_confidence` (French champion models only) is the runner-up at that phoneme's most
+            confident frame, or null if unavailable.
+        audio_info (str | Unset): `{ duration_seconds, sample_rate }` — sample_rate is always 16000.
     """
 
-    python_output: str | Unset = UNSET
+    success: bool | Unset = UNSET
+    status: str | Unset = UNSET
+    message: str | Unset = UNSET
+    language: str | Unset = UNSET
+    transcription: str | Unset = UNSET
+    phoneme_count: float | Unset = UNSET
+    phonemes: list[PostAnalyzePhonemesLiveResponse200PhonemesItem] | Unset = UNSET
+    phoneme_timings: list[PostAnalyzePhonemesLiveResponse200PhonemeTimingsItem] | Unset = UNSET
+    audio_info: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        python_output = self.python_output
+        success = self.success
+
+        status = self.status
+
+        message = self.message
+
+        language = self.language
+
+        transcription = self.transcription
+
+        phoneme_count = self.phoneme_count
+
+        phonemes: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.phonemes, Unset):
+            phonemes = []
+            for phonemes_item_data in self.phonemes:
+                phonemes_item = phonemes_item_data.to_dict()
+                phonemes.append(phonemes_item)
+
+        phoneme_timings: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.phoneme_timings, Unset):
+            phoneme_timings = []
+            for phoneme_timings_item_data in self.phoneme_timings:
+                phoneme_timings_item = phoneme_timings_item_data.to_dict()
+                phoneme_timings.append(phoneme_timings_item)
+
+        audio_info = self.audio_info
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if python_output is not UNSET:
-            field_dict["<python output>"] = python_output
+        if success is not UNSET:
+            field_dict["success"] = success
+        if status is not UNSET:
+            field_dict["status"] = status
+        if message is not UNSET:
+            field_dict["message"] = message
+        if language is not UNSET:
+            field_dict["language"] = language
+        if transcription is not UNSET:
+            field_dict["transcription"] = transcription
+        if phoneme_count is not UNSET:
+            field_dict["phoneme_count"] = phoneme_count
+        if phonemes is not UNSET:
+            field_dict["phonemes"] = phonemes
+        if phoneme_timings is not UNSET:
+            field_dict["phoneme_timings"] = phoneme_timings
+        if audio_info is not UNSET:
+            field_dict["audio_info"] = audio_info
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.post_analyze_phonemes_live_response_200_phoneme_timings_item import (
+            PostAnalyzePhonemesLiveResponse200PhonemeTimingsItem,
+        )
+        from ..models.post_analyze_phonemes_live_response_200_phonemes_item import (
+            PostAnalyzePhonemesLiveResponse200PhonemesItem,
+        )
+
         d = dict(src_dict)
-        python_output = d.pop("<python output>", UNSET)
+        success = d.pop("success", UNSET)
+
+        status = d.pop("status", UNSET)
+
+        message = d.pop("message", UNSET)
+
+        language = d.pop("language", UNSET)
+
+        transcription = d.pop("transcription", UNSET)
+
+        phoneme_count = d.pop("phoneme_count", UNSET)
+
+        _phonemes = d.pop("phonemes", UNSET)
+        phonemes: list[PostAnalyzePhonemesLiveResponse200PhonemesItem] | Unset = UNSET
+        if _phonemes is not UNSET:
+            phonemes = []
+            for phonemes_item_data in _phonemes:
+                phonemes_item = PostAnalyzePhonemesLiveResponse200PhonemesItem.from_dict(
+                    phonemes_item_data
+                )
+
+                phonemes.append(phonemes_item)
+
+        _phoneme_timings = d.pop("phoneme_timings", UNSET)
+        phoneme_timings: list[PostAnalyzePhonemesLiveResponse200PhonemeTimingsItem] | Unset = UNSET
+        if _phoneme_timings is not UNSET:
+            phoneme_timings = []
+            for phoneme_timings_item_data in _phoneme_timings:
+                phoneme_timings_item = (
+                    PostAnalyzePhonemesLiveResponse200PhonemeTimingsItem.from_dict(
+                        phoneme_timings_item_data
+                    )
+                )
+
+                phoneme_timings.append(phoneme_timings_item)
+
+        audio_info = d.pop("audio_info", UNSET)
 
         post_analyze_phonemes_live_response_200 = cls(
-            python_output=python_output,
+            success=success,
+            status=status,
+            message=message,
+            language=language,
+            transcription=transcription,
+            phoneme_count=phoneme_count,
+            phonemes=phonemes,
+            phoneme_timings=phoneme_timings,
+            audio_info=audio_info,
         )
 
         post_analyze_phonemes_live_response_200.additional_properties = d

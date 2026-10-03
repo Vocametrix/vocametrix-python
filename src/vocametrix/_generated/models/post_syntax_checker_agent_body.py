@@ -18,7 +18,7 @@ class PostSyntaxCheckerAgentBody:
         text (str): REQUIRED. Text to analyze (≤ 5000 characters).
         locale (str): REQUIRED. Language code (validated via validateLanguageCode).
         thread_id (str | Unset): Optional. Thread ID for multi-turn continuity.
-        email (str | Unset): Optional. Used by anonymous-key validation flow.
+        email (str | Unset): Optional. Used by the credit-validation flow.
     """
 
     text: str

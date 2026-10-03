@@ -41,7 +41,6 @@ class PostTherapyPlanningAgentResponse200:
         all_messages (list[PostTherapyPlanningAgentResponse200AllMessagesItem] | Unset): Array — full thread message
             history.
         remaining_credits (float | Unset): Number.
-        is_anonymous_session (bool | Unset): Boolean.
         metadata (PostTherapyPlanningAgentResponse200Metadata | Unset): Object: { patient_id, session_id,
             processing_time_seconds, disfluency_types, fluency_rate, total_segments_analyzed, response_metadata:
             {responseLength, containsStructuredData, parseSuccess} }.
@@ -56,7 +55,6 @@ class PostTherapyPlanningAgentResponse200:
     recommendation: PostTherapyPlanningAgentResponse200Recommendation | Unset = UNSET
     all_messages: list[PostTherapyPlanningAgentResponse200AllMessagesItem] | Unset = UNSET
     remaining_credits: float | Unset = UNSET
-    is_anonymous_session: bool | Unset = UNSET
     metadata: PostTherapyPlanningAgentResponse200Metadata | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -88,8 +86,6 @@ class PostTherapyPlanningAgentResponse200:
 
         remaining_credits = self.remaining_credits
 
-        is_anonymous_session = self.is_anonymous_session
-
         metadata: dict[str, Any] | Unset = UNSET
         if not isinstance(self.metadata, Unset):
             metadata = self.metadata.to_dict()
@@ -115,8 +111,6 @@ class PostTherapyPlanningAgentResponse200:
             field_dict["allMessages"] = all_messages
         if remaining_credits is not UNSET:
             field_dict["remaining_credits"] = remaining_credits
-        if is_anonymous_session is not UNSET:
-            field_dict["isAnonymousSession"] = is_anonymous_session
         if metadata is not UNSET:
             field_dict["metadata"] = metadata
 
@@ -174,8 +168,6 @@ class PostTherapyPlanningAgentResponse200:
 
         remaining_credits = d.pop("remaining_credits", UNSET)
 
-        is_anonymous_session = d.pop("isAnonymousSession", UNSET)
-
         _metadata = d.pop("metadata", UNSET)
         metadata: PostTherapyPlanningAgentResponse200Metadata | Unset
         if isinstance(_metadata, Unset):
@@ -193,7 +185,6 @@ class PostTherapyPlanningAgentResponse200:
             recommendation=recommendation,
             all_messages=all_messages,
             remaining_credits=remaining_credits,
-            is_anonymous_session=is_anonymous_session,
             metadata=metadata,
         )
 

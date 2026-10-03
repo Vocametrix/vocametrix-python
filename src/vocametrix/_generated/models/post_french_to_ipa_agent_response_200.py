@@ -28,7 +28,6 @@ class PostFrenchToIpaAgentResponse200:
         thread_id (str | Unset): Thread ID.
         agent_name (str | Unset): Agent identifier.
         remaining_credits (float | Unset): Number.
-        is_anonymous_session (bool | Unset): Boolean.
     """
 
     success: bool | Unset = UNSET
@@ -36,7 +35,6 @@ class PostFrenchToIpaAgentResponse200:
     thread_id: str | Unset = UNSET
     agent_name: str | Unset = UNSET
     remaining_credits: float | Unset = UNSET
-    is_anonymous_session: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -52,8 +50,6 @@ class PostFrenchToIpaAgentResponse200:
 
         remaining_credits = self.remaining_credits
 
-        is_anonymous_session = self.is_anonymous_session
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
@@ -67,8 +63,6 @@ class PostFrenchToIpaAgentResponse200:
             field_dict["agentName"] = agent_name
         if remaining_credits is not UNSET:
             field_dict["remaining_credits"] = remaining_credits
-        if is_anonymous_session is not UNSET:
-            field_dict["isAnonymousSession"] = is_anonymous_session
 
         return field_dict
 
@@ -94,15 +88,12 @@ class PostFrenchToIpaAgentResponse200:
 
         remaining_credits = d.pop("remaining_credits", UNSET)
 
-        is_anonymous_session = d.pop("isAnonymousSession", UNSET)
-
         post_french_to_ipa_agent_response_200 = cls(
             success=success,
             result=result,
             thread_id=thread_id,
             agent_name=agent_name,
             remaining_credits=remaining_credits,
-            is_anonymous_session=is_anonymous_session,
         )
 
         post_french_to_ipa_agent_response_200.additional_properties = d

@@ -27,7 +27,7 @@ class PostLanguageChatPronunciationBody:
         topic (str): REQUIRED. Conversation topic.
         native_language (str | Unset): Optional. The learner's native language code.
         thread_id (str | Unset): Optional. Thread ID for multi-turn continuity.
-        email (str | Unset): Optional. Used by anonymous-key validation flow.
+        email (str | Unset): Optional. Used by the credit-validation flow.
         assessment_history (list[PostLanguageChatPronunciationBodyAssessmentHistoryItem] | Unset): Optional. Array or
             object of prior pronunciation-assessment results to feed into the coach for grounded feedback.
     """

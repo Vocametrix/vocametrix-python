@@ -5,6 +5,7 @@ from .get_calculate_ambitus_gender import GetCalculateAmbitusGender
 from .get_calculate_ambitus_response_200 import GetCalculateAmbitusResponse200
 from .get_calculate_avqi_response_200 import GetCalculateAvqiResponse200
 from .get_calculate_cpp_response_200 import GetCalculateCppResponse200
+from .get_calculate_csid_response_200 import GetCalculateCsidResponse200
 from .get_calculate_dsi_response_200 import GetCalculateDsiResponse200
 from .get_calculate_formant_statistics_gender import GetCalculateFormantStatisticsGender
 from .get_calculate_formant_statistics_response_200 import GetCalculateFormantStatisticsResponse200
@@ -42,12 +43,50 @@ from .post_adaptive_exercise_agent_response_200_metadata import (
 )
 from .post_analyze_phonemes_live_body import PostAnalyzePhonemesLiveBody
 from .post_analyze_phonemes_live_response_200 import PostAnalyzePhonemesLiveResponse200
+from .post_analyze_phonemes_live_response_200_phoneme_timings_item import (
+    PostAnalyzePhonemesLiveResponse200PhonemeTimingsItem,
+)
+from .post_analyze_phonemes_live_response_200_phonemes_item import (
+    PostAnalyzePhonemesLiveResponse200PhonemesItem,
+)
 from .post_assign_file_id_body import PostAssignFileIdBody
 from .post_assign_file_id_response_200 import PostAssignFileIdResponse200
 from .post_classify_estonian_vowel_body import PostClassifyEstonianVowelBody
 from .post_classify_estonian_vowel_response_200 import PostClassifyEstonianVowelResponse200
+from .post_classify_french_fricative_body import PostClassifyFrenchFricativeBody
+from .post_classify_french_fricative_response_200 import PostClassifyFrenchFricativeResponse200
+from .post_classify_french_fricative_response_200_all_probabilities import (
+    PostClassifyFrenchFricativeResponse200AllProbabilities,
+)
+from .post_classify_french_liquid_nasal_body import PostClassifyFrenchLiquidNasalBody
+from .post_classify_french_liquid_nasal_response_200 import PostClassifyFrenchLiquidNasalResponse200
+from .post_classify_french_liquid_nasal_response_200_all_probabilities import (
+    PostClassifyFrenchLiquidNasalResponse200AllProbabilities,
+)
+from .post_classify_french_plosive_body import PostClassifyFrenchPlosiveBody
+from .post_classify_french_plosive_response_200 import PostClassifyFrenchPlosiveResponse200
+from .post_classify_french_plosive_response_200_all_probabilities import (
+    PostClassifyFrenchPlosiveResponse200AllProbabilities,
+)
+from .post_classify_french_vowel_body import PostClassifyFrenchVowelBody
+from .post_classify_french_vowel_response_200 import PostClassifyFrenchVowelResponse200
+from .post_classify_french_vowel_response_200_all_probabilities import (
+    PostClassifyFrenchVowelResponse200AllProbabilities,
+)
 from .post_classify_stuttering_body import PostClassifyStutteringBody
 from .post_classify_stuttering_response_200 import PostClassifyStutteringResponse200
+from .post_estimate_formants_body import PostEstimateFormantsBody
+from .post_estimate_formants_response_200 import PostEstimateFormantsResponse200
+from .post_estimate_formants_response_200_formants import PostEstimateFormantsResponse200Formants
+from .post_estimate_formants_response_200_ipa_coordinates import (
+    PostEstimateFormantsResponse200IpaCoordinates,
+)
+from .post_estimate_formants_response_200_speaker_info import (
+    PostEstimateFormantsResponse200SpeakerInfo,
+)
+from .post_estimate_formants_response_200_suggestions_item import (
+    PostEstimateFormantsResponse200SuggestionsItem,
+)
 from .post_french_to_ipa_agent_body import PostFrenchToIpaAgentBody
 from .post_french_to_ipa_agent_body_phonetic_input_item import (
     PostFrenchToIpaAgentBodyPhoneticInputItem,
@@ -137,6 +176,15 @@ from .post_vocabulary_tutor_agent_response_200 import PostVocabularyTutorAgentRe
 from .post_vocabulary_tutor_agent_response_200_metadata import (
     PostVocabularyTutorAgentResponse200Metadata,
 )
+from .post_voice_assessment_body import PostVoiceAssessmentBody
+from .post_voice_assessment_response_200 import PostVoiceAssessmentResponse200
+from .post_voice_assessment_response_200_audio import PostVoiceAssessmentResponse200Audio
+from .post_voice_assessment_response_200_details import PostVoiceAssessmentResponse200Details
+from .post_voice_assessment_response_200_errors import PostVoiceAssessmentResponse200Errors
+from .post_voice_assessment_response_200_summary import PostVoiceAssessmentResponse200Summary
+from .post_voice_assessment_response_200_warnings_item import (
+    PostVoiceAssessmentResponse200WarningsItem,
+)
 from .post_voice_metrics_interpreter_body import PostVoiceMetricsInterpreterBody
 from .post_voice_metrics_interpreter_body_metrics import PostVoiceMetricsInterpreterBodyMetrics
 from .post_voice_metrics_interpreter_body_praat_results import (
@@ -165,6 +213,7 @@ __all__ = (
     "GetCalculateAmbitusResponse200",
     "GetCalculateAvqiResponse200",
     "GetCalculateCppResponse200",
+    "GetCalculateCsidResponse200",
     "GetCalculateDsiResponse200",
     "GetCalculateFormantStatisticsGender",
     "GetCalculateFormantStatisticsResponse200",
@@ -192,12 +241,32 @@ __all__ = (
     "PostAdaptiveExerciseAgentResponse200Metadata",
     "PostAnalyzePhonemesLiveBody",
     "PostAnalyzePhonemesLiveResponse200",
+    "PostAnalyzePhonemesLiveResponse200PhonemesItem",
+    "PostAnalyzePhonemesLiveResponse200PhonemeTimingsItem",
     "PostAssignFileIdBody",
     "PostAssignFileIdResponse200",
     "PostClassifyEstonianVowelBody",
     "PostClassifyEstonianVowelResponse200",
+    "PostClassifyFrenchFricativeBody",
+    "PostClassifyFrenchFricativeResponse200",
+    "PostClassifyFrenchFricativeResponse200AllProbabilities",
+    "PostClassifyFrenchLiquidNasalBody",
+    "PostClassifyFrenchLiquidNasalResponse200",
+    "PostClassifyFrenchLiquidNasalResponse200AllProbabilities",
+    "PostClassifyFrenchPlosiveBody",
+    "PostClassifyFrenchPlosiveResponse200",
+    "PostClassifyFrenchPlosiveResponse200AllProbabilities",
+    "PostClassifyFrenchVowelBody",
+    "PostClassifyFrenchVowelResponse200",
+    "PostClassifyFrenchVowelResponse200AllProbabilities",
     "PostClassifyStutteringBody",
     "PostClassifyStutteringResponse200",
+    "PostEstimateFormantsBody",
+    "PostEstimateFormantsResponse200",
+    "PostEstimateFormantsResponse200Formants",
+    "PostEstimateFormantsResponse200IpaCoordinates",
+    "PostEstimateFormantsResponse200SpeakerInfo",
+    "PostEstimateFormantsResponse200SuggestionsItem",
     "PostFrenchToIpaAgentBody",
     "PostFrenchToIpaAgentBodyPhoneticInputItem",
     "PostFrenchToIpaAgentResponse200",
@@ -251,6 +320,13 @@ __all__ = (
     "PostVocabularyTutorAgentBody",
     "PostVocabularyTutorAgentResponse200",
     "PostVocabularyTutorAgentResponse200Metadata",
+    "PostVoiceAssessmentBody",
+    "PostVoiceAssessmentResponse200",
+    "PostVoiceAssessmentResponse200Audio",
+    "PostVoiceAssessmentResponse200Details",
+    "PostVoiceAssessmentResponse200Errors",
+    "PostVoiceAssessmentResponse200Summary",
+    "PostVoiceAssessmentResponse200WarningsItem",
     "PostVoiceMetricsInterpreterBody",
     "PostVoiceMetricsInterpreterBodyMetrics",
     "PostVoiceMetricsInterpreterBodyPraatResults",
