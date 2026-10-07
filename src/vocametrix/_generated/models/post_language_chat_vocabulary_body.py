@@ -19,7 +19,7 @@ class PostLanguageChatVocabularyBody:
         language (str): REQUIRED. Target language the user is learning (en-US, fr-FR, es-ES, de-DE, etc.)
         native_language (str): REQUIRED. The user's native language code — used to localize vocabulary hints and
             corrections
-        age_level (str): Age/level (child-beginner, teen-intermediate, adult-advanced, etc.)
+        age_level (str): CEFR level of the learner (A1, A2, B1, B2, C1, C2)
         topic (str): Conversation topic (family, travel, food, work, hobbies, etc.)
         thread_id (str | Unset): Optional thread ID to continue previous conversation
         email (str | Unset): Optional user email for tracking
