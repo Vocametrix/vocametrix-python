@@ -23,7 +23,7 @@ class PostLanguageChatPronunciationBody:
     Attributes:
         message (str): REQUIRED. The learner's message in the target language.
         language (str): REQUIRED. Target language being learned.
-        age_level (str): REQUIRED. Categorical age/level label.
+        age_level (str): REQUIRED. CEFR level of the learner (A1, A2, B1, B2, C1, C2).
         topic (str): REQUIRED. Conversation topic.
         native_language (str | Unset): Optional. The learner's native language code.
         thread_id (str | Unset): Optional. Thread ID for multi-turn continuity.

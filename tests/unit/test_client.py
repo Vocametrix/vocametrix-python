@@ -197,8 +197,8 @@ def test_stuttering_raises_on_timeout(tmp_path, client):
 
 
 @respx.mock
-def test_client_email_used_as_namespace_default(tmp_path):
-    """email set at client level should appear in upload requests."""
+def test_client_email_not_sent_in_uploads(tmp_path):
+    """email is deprecated: a client-level email is no longer sent in upload requests."""
     client = VocametrixClient(api_key="key", email="user@example.com")
     wav = tmp_path / "vowel.wav"
     wav.write_bytes(b"RIFF" + b"\x00" * 40)
@@ -221,11 +221,11 @@ def test_client_email_used_as_namespace_default(tmp_path):
     client.avqi.calculate(sustained_vowel=str(wav))
     client.close()
 
-    assert captured_email.get("value") == "user@example.com"
+    assert "value" not in captured_email
 
 
 @respx.mock
-def test_per_call_email_overrides_client_default(tmp_path):
+def test_per_call_email_not_sent_in_uploads(tmp_path):
     client = VocametrixClient(api_key="key", email="client@example.com")
     wav = tmp_path / "vowel.wav"
     wav.write_bytes(b"RIFF" + b"\x00" * 40)
@@ -248,7 +248,7 @@ def test_per_call_email_overrides_client_default(tmp_path):
     client.dsi.calculate(sustained_vowel=str(wav), email="override@example.com")
     client.close()
 
-    assert captured_email.get("value") == "override@example.com"
+    assert "value" not in captured_email
 
 
 @pytest.mark.asyncio
@@ -315,7 +315,7 @@ def test_transcription_event_importable_from_top_level():
 
 
 @respx.mock
-def test_default_email_is_info_vocametrix(tmp_path):
+def test_default_client_sends_no_email(tmp_path):
     wav = tmp_path / "v.wav"
     wav.write_bytes(b"RIFF" + b"\x00" * 40)
     captured = {}
@@ -335,7 +335,7 @@ def test_default_email_is_info_vocametrix(tmp_path):
     with VocametrixClient(api_key="key") as c:
         c.avqi.calculate(sustained_vowel=str(wav))
 
-    assert captured.get("email") == "info@vocametrix.com"
+    assert "email" not in captured
 
 
 
@@ -427,12 +427,6 @@ def test_client_has_ai_agents_namespace():
         assert hasattr(c.ai_agents, "interpret_metrics")
 
 
-def test_client_has_speech_coaching_namespace():
-    with VocametrixClient(api_key="key") as c:
-        assert hasattr(c, "speech_coaching")
-        assert hasattr(c.speech_coaching, "analyze")
-        assert hasattr(c.speech_coaching, "analyze_batch")
-        assert hasattr(c.speech_coaching, "get_batch_result")
 
 
 @respx.mock
@@ -447,15 +441,3 @@ def test_ai_agents_therapy_plan():
         )
     assert result["recommendation"] == "rest your voice"
 
-
-@respx.mock
-def test_speech_coaching_analyze():
-    respx.post(f"{BASE}/api/coaching-analysis").mock(
-        return_value=httpx.Response(200, json={"score": 87.5})
-    )
-    with VocametrixClient(api_key="key") as c:
-        result = c.speech_coaching.analyze(
-            reference_audio_url="https://cdn.example.com/ref.wav",
-            learner_audio_url="https://cdn.example.com/learner.wav",
-        )
-    assert result["score"] == 87.5

@@ -31,8 +31,8 @@ class PostAnalyzePhonemesLiveResponse200:
         language (str | Unset): Echoed language code processed.
         transcription (str | Unset): Space-separated sequence of detected phonemes (empty string if silence).
         phoneme_count (float | Unset): Total number of phonemes detected.
-        phonemes (list[PostAnalyzePhonemesLiveResponse200PhonemesItem] | Unset): Array of the phoneme labels detected,
-            in order.
+        phonemes (list[PostAnalyzePhonemesLiveResponse200PhonemesItem] | Unset): Array of unique phoneme labels, in
+            order of first appearance (duplicates removed). Use `transcription` or `phoneme_timings` for the full sequence.
         phoneme_timings (list[PostAnalyzePhonemesLiveResponse200PhonemeTimingsItem] | Unset): Array of `{ phoneme,
             start, end, duration, confidence, second_phoneme, second_confidence }` — one entry per phoneme.
             `second_phoneme`/`second_confidence` (French champion models only) is the runner-up at that phoneme's most
