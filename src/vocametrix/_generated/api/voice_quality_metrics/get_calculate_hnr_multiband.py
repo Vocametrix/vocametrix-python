@@ -89,7 +89,7 @@ def sync_detailed(
     gender: GetCalculateHnrMultibandGender,
     version: str | Unset = UNSET,
 ) -> Response[Any | GetCalculateHnrMultibandResponse200]:
-    """Calculate multi-band HNR with age and gender-specific clinical interpretation
+    """Calculate multi-band HNR with gender-specific F0 notes (no dysphonia verdict)
 
     Args:
         sv_file_id (str):
@@ -127,7 +127,7 @@ def sync(
     gender: GetCalculateHnrMultibandGender,
     version: str | Unset = UNSET,
 ) -> Any | GetCalculateHnrMultibandResponse200 | None:
-    """Calculate multi-band HNR with age and gender-specific clinical interpretation
+    """Calculate multi-band HNR with gender-specific F0 notes (no dysphonia verdict)
 
     Args:
         sv_file_id (str):
@@ -160,7 +160,7 @@ async def asyncio_detailed(
     gender: GetCalculateHnrMultibandGender,
     version: str | Unset = UNSET,
 ) -> Response[Any | GetCalculateHnrMultibandResponse200]:
-    """Calculate multi-band HNR with age and gender-specific clinical interpretation
+    """Calculate multi-band HNR with gender-specific F0 notes (no dysphonia verdict)
 
     Args:
         sv_file_id (str):
@@ -196,7 +196,7 @@ async def asyncio(
     gender: GetCalculateHnrMultibandGender,
     version: str | Unset = UNSET,
 ) -> Any | GetCalculateHnrMultibandResponse200 | None:
-    """Calculate multi-band HNR with age and gender-specific clinical interpretation
+    """Calculate multi-band HNR with gender-specific F0 notes (no dysphonia verdict)
 
     Args:
         sv_file_id (str):

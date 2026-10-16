@@ -65,8 +65,10 @@ class GetCalculateVoiceDynamicsResponse200:
         visualization_note (str | Unset): Hint for downstream visualizers.
         patient_age (str | Unset): Echo of the input age.
         age_group (str | Unset): Categorical age group (Child / Adolescent / Adult / Older Adult).
-        presbylaryngis_risk (str | Unset): Categorical: presbylaryngis (age-related laryngeal change) risk.
-        presbylaryngis_age_threshold (str | Unset): Threshold age above which presbylaryngis is suspected.
+        presbylaryngis_risk (str | Unset): Categorical age flag, informational only: to our knowledge, no validated
+            presbylaryngis cut-off on these measures.
+        presbylaryngis_age_threshold (str | Unset): Age above which the flag is set (internal setting, not a validated
+            cut-off).
         expected_intensity_range (str | Unset): Expected intensity range string for this demographic.
     """
 

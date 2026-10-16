@@ -17,16 +17,16 @@ class GetCalculateSpectralAdvancedResponse200:
     Attributes:
         spectral_mean (float | Unset): Weighted average frequency (center of gravity) in Hz. Example: 1847.3
         spectral_sd (float | Unset): Standard deviation of spectral distribution in Hz. Example: 623.8
-        spectral_skewness (str | Unset): Third moment indicating spectral asymmetry. Example: 0.85
-        spectral_kurtosis (str | Unset): Fourth moment indicating spectral peakedness. Example: 2.34
+        spectral_skewness (float | Unset): Third moment indicating spectral asymmetry. Example: 0.85
+        spectral_kurtosis (float | Unset): Fourth moment indicating spectral peakedness. Example: 2.34
         alpha_ratio (float | Unset): Energy ratio below/above 1 kHz in dB. Example: 4.2
         l1_l0 (float | Unset): First formant to fundamental energy difference in dB. Example: -8.5
         h1_h2 (float | Unset): First to second harmonic amplitude difference in dB. Example: 3.8
         h1_a1 (float | Unset): First harmonic to first formant amplitude difference in dB. Example: -5.2
         h1_a3 (float | Unset): First harmonic to third formant amplitude difference in dB. Example: -15.7
         spectral_flux (float | Unset): Rate of spectral change in Hz. Example: 234.6
-        ltas_slope (float | Unset): Spectral slope 0-1 kHz vs 1-4 kHz in dB/octave. Example: -12.4
-        ltas_tilt (float | Unset): Trend line slope across 1-4 kHz in dB/octave. Example: -8.9
+        ltas_slope (float | Unset): Spectral slope 0-1 kHz vs 1-4 kHz in dB. Example: -12.4
+        ltas_tilt (float | Unset): Trend line slope across 1-4 kHz in dB. Example: -8.9
         ltas_curve (float | Unset): Full Long-Term Average Spectrum as freq/dB pairs, 80-4000 Hz in 100 Hz steps.
             Example: [{"freq":80,"db":-25.3}, ...]
         mean_f0 (float | Unset): Mean fundamental frequency in Hz. Example: 195.8
@@ -38,7 +38,7 @@ class GetCalculateSpectralAdvancedResponse200:
         breathiness_level (str | Unset): Breathiness assessment. Example: "Minimal breathiness"
         voice_stability (str | Unset): Stability classification. Example: "Good stability"
         spectral_health (str | Unset): Overall spectral assessment. Example: "Healthy spectral characteristics"
-        patient_age (str | Unset): Patient age used in analysis. Example: 35
+        patient_age (int | Unset): Patient age used in analysis. Example: 35
         patient_gender (str | Unset): Patient gender classification. Example: "Female"
         age_group (str | Unset): Age group classification. Example: "Young Adult"
         age_note (str | Unset): Age-related clinical note. Example: "Age within normal vocal range"
@@ -46,15 +46,15 @@ class GetCalculateSpectralAdvancedResponse200:
         f0_validity (str | Unset): F0 validation status. Example: "Valid"
         gender_spectral_note (str | Unset): Gender-specific spectral note. Example: "Female spectral characteristics
             confirmed"
-        expected_f0_min (str | Unset): Expected minimum F0 for age/gender. Example: 165.4
-        expected_f0_max (str | Unset): Expected maximum F0 for age/gender. Example: 294.3
-        spectral_mean_expected (str | Unset): Expected spectral mean for demographics. Example: 1923.5
+        expected_f0_min (float | Unset): Expected minimum F0 for age/gender. Example: 165.4
+        expected_f0_max (float | Unset): Expected maximum F0 for age/gender. Example: 294.3
+        spectral_mean_expected (float | Unset): Expected spectral mean for demographics. Example: 1923.5
     """
 
     spectral_mean: float | Unset = UNSET
     spectral_sd: float | Unset = UNSET
-    spectral_skewness: str | Unset = UNSET
-    spectral_kurtosis: str | Unset = UNSET
+    spectral_skewness: float | Unset = UNSET
+    spectral_kurtosis: float | Unset = UNSET
     alpha_ratio: float | Unset = UNSET
     l1_l0: float | Unset = UNSET
     h1_h2: float | Unset = UNSET
@@ -73,16 +73,16 @@ class GetCalculateSpectralAdvancedResponse200:
     breathiness_level: str | Unset = UNSET
     voice_stability: str | Unset = UNSET
     spectral_health: str | Unset = UNSET
-    patient_age: str | Unset = UNSET
+    patient_age: int | Unset = UNSET
     patient_gender: str | Unset = UNSET
     age_group: str | Unset = UNSET
     age_note: str | Unset = UNSET
     f0_note: str | Unset = UNSET
     f0_validity: str | Unset = UNSET
     gender_spectral_note: str | Unset = UNSET
-    expected_f0_min: str | Unset = UNSET
-    expected_f0_max: str | Unset = UNSET
-    spectral_mean_expected: str | Unset = UNSET
+    expected_f0_min: float | Unset = UNSET
+    expected_f0_max: float | Unset = UNSET
+    spectral_mean_expected: float | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

@@ -16,24 +16,27 @@ class GetCalculateGneResponse200:
     """
     Attributes:
         gne_value (float | Unset): Glottal-to-Noise Excitation Ratio on 0-1 scale. Example: 0.425
-        gne_db (str | Unset): GNE expressed in decibel scale for clinical interpretation. Example: -7.4
-        mean_f0 (float | Unset): Average fundamental frequency in Hz. Example: 185.3
+        gne_db (float | Unset): 10*log10(GNE/(1-GNE)), a Vocametrix convenience transform, not a standard GNE measure
+            (Michaelis 1997 reports GNE on its 0-1 scale). Example: -1.3
+        mean_f0 (float | Unset): Average fundamental frequency in Hz. Example: 205.3
         f0_std (float | Unset): F0 standard deviation indicating pitch stability in Hz. Example: 8.3
         hnr (float | Unset): Harmonics-to-noise ratio in dB (for comparison with GNE). Example: 12.8
-        gender (str | Unset): Gender classification based on F0 range. Example: "Female"
-        voice_quality (str | Unset): Qualitative assessment of voice quality. Example: "Borderline normal"
-        clinical_recommendation (str | Unset): Contextual clinical guidance based on GNE value. Example: "Monitor voice
-            quality. Consider vocal hygiene if symptoms persist."
+        gender (str | Unset): Sex inferred from F0 against reference ranges (men about 88-172 Hz, women about 194-314
+            Hz, Banh 2009), otherwise "Undetermined (...)". Example: "Female"
+        voice_quality (str | Unset): No verdict: to our knowledge, no validated cutoff exists for Praat GNE. Example:
+            "Not classified (no validated cutoff to our knowledge)"
+        clinical_recommendation (str | Unset): Fixed guidance text. Example: "To our knowledge, no validated diagnostic
+            cutoff for GNE in Praat. Interpret with other measures and perceptual evaluation"
         method (str | Unset): Calculation method identifier. Example: "Native_Praat_GNE"
         analysis_type (str | Unset): Analysis type descriptor. Example: "Native_Praat_GNE"
-        frequency_range (float | Unset): Frequency range analyzed. Example: "500-4500 Hz"
-        bandwidth (float | Unset): Bandwidth used in analysis. Example: "1000 Hz"
-        step_size (float | Unset): Step size for frequency analysis. Example: "80 Hz"
+        frequency_range (str | Unset): Frequency range analyzed. Example: "500-4500 Hz"
+        bandwidth (str | Unset): Bandwidth used in analysis. Example: "1000 Hz"
+        step_size (str | Unset): Step size for frequency analysis. Example: "80 Hz"
         algorithm (str | Unset): Algorithm reference. Example: "Michaelis_et_al_1997"
     """
 
     gne_value: float | Unset = UNSET
-    gne_db: str | Unset = UNSET
+    gne_db: float | Unset = UNSET
     mean_f0: float | Unset = UNSET
     f0_std: float | Unset = UNSET
     hnr: float | Unset = UNSET
@@ -42,9 +45,9 @@ class GetCalculateGneResponse200:
     clinical_recommendation: str | Unset = UNSET
     method: str | Unset = UNSET
     analysis_type: str | Unset = UNSET
-    frequency_range: float | Unset = UNSET
-    bandwidth: float | Unset = UNSET
-    step_size: float | Unset = UNSET
+    frequency_range: str | Unset = UNSET
+    bandwidth: str | Unset = UNSET
+    step_size: str | Unset = UNSET
     algorithm: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 

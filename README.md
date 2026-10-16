@@ -67,7 +67,7 @@ Never hardcode API keys in source code. Use environment variables or a secrets m
 | `client.cpp` | Cepstral Peak Prominence |
 | `client.hnr` | Multi-band Harmonics-to-Noise Ratio |
 | `client.jitter_shimmer` | Jitter & shimmer (Teixeira & Gonçalves 2014) |
-| `client.vrp` | Voice Range Profile (ambitus / glissando) |
+| `client.vrp` | Vocal range (ambitus, F0 only, from a glissando) |
 | `client.pronunciation` | Pronunciation assessment (30+ locales) |
 | `client.transcription` | Async speech-to-text with SSE |
 | `client.tts` | Text-to-speech with per-character timing |

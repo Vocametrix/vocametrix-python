@@ -16,8 +16,9 @@ class GetCalculateCppResponse200:
     """
     Attributes:
         cpp (float | Unset): Cepstral Peak Prominence value in dB. Example: 12.45
-        voice_quality (str | Unset): Clinical voice quality assessment. Example: "Good voice quality"
-        severity (str | Unset): Dysphonia severity classification. Example: "Normal"
+        voice_quality (str | Unset): Binary classification against the 14.45 dB cut-off (Murton et al. 2020). Example:
+            "Normal"
+        severity (str | Unset): Text note on the classification. Example: "No dysphonia indicated"
     """
 
     cpp: float | Unset = UNSET

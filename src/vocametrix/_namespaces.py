@@ -145,11 +145,11 @@ class JitterShimmerNamespace:
 
 class VrpNamespace:
     """
-    Voice Range Profile (VRP) — also known as phonetogram or ambitus.
+    Vocal range (ambitus) from a glissando, F0 only.
 
-    The backend endpoint is /api/calculate-ambitus; "ambitus" and "VRP" refer
-    to the same measurement (the pitch/intensity envelope of a speaker's vocal
-    range). This namespace is named VRP for clinical clarity.
+    The backend endpoint is /api/calculate-ambitus. It measures pitch, not
+    intensity, so it is not a full Voice Range Profile (phonetogram). The
+    namespace keeps the name ``vrp`` for backward compatibility.
     """
     def __init__(self, client: httpx.Client, base_url: str, default_email: str = "info@vocametrix.com") -> None:
         self._c = client

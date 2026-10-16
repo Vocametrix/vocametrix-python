@@ -26,13 +26,15 @@ class GetCalculateH1H2Response200:
             correlate. Example: 473.00
         f2_mean (float | Unset): Mean second formant frequency in Hz. Extracted using Praat Burg algorithm. Vowel
             frontness/backness correlate. Example: 1183.97
-        b1_mean (float | Unset): Estimated first formant bandwidth in Hz. Calculated using Hawk & Miller (1995) formula:
-            B1 = 50 + (F1/10). Used for formant correction. Example: 97.30
-        b2_mean (float | Unset): Estimated second formant bandwidth in Hz. Calculated using Hawk & Miller (1995)
-            formula: B2 = 70 + (F2/50). Used for formant correction. Example: 93.68
+        b1_mean (float | Unset): Estimated first formant bandwidth in Hz. Calculated with the Hawks & Miller (1995)
+            bandwidth: 5th-order polynomial in the formant frequency (separate coefficients below and above 500 Hz), scaled
+            by S = 1 + 0.25 × (F0 − 132) / 88; coefficients as in VoiceSauce. Used for formant correction. Example: 36.95
+        b2_mean (float | Unset): Estimated second formant bandwidth in Hz. Calculated with the Hawks & Miller (1995)
+            bandwidth: 5th-order polynomial in the formant frequency (separate coefficients below and above 500 Hz), scaled
+            by S = 1 + 0.25 × (F0 − 132) / 88; coefficients as in VoiceSauce. Used for formant correction. Example: 43.28
         frames_analyzed (float | Unset): Number of valid frames analyzed. Frame shift = 1ms, window = 3 pitch periods.
             Higher counts indicate longer recordings or more stable voicing. Example: 2977
-        gender (float | Unset): Gender classification used for formant analysis. Determines formant ceiling frequency.
+        gender (str | Unset): Gender classification used for formant analysis. Determines formant ceiling frequency.
             Example: "Male" or "Female (F0-based)"
     """
 
@@ -44,7 +46,7 @@ class GetCalculateH1H2Response200:
     b1_mean: float | Unset = UNSET
     b2_mean: float | Unset = UNSET
     frames_analyzed: float | Unset = UNSET
-    gender: float | Unset = UNSET
+    gender: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

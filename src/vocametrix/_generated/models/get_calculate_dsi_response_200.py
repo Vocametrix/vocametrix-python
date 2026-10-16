@@ -16,16 +16,16 @@ class GetCalculateDsiResponse200:
     """
     Attributes:
         dsi (float | Unset): number - Dysphonia Severity Index score (approx range -5 to +5). Example: 1.85
-        jitter (float | Unset): number - Period Perturbation Quotient (PPQ5) as a percentage or fraction (parsed as
-            number). Example: 0.45
+        jitter (float | Unset): number - Jitter PPQ5 (Praat, %) entering the DSIbeta formula. Example: 0.45
         mpt (float | Unset): number - Maximum Phonation Time in seconds (echoes input MPT or measured). Example: 15.2
         minlevel (float | Unset): number - Minimum intensity level in dB SPL. Example: 45.5
         maxf0 (float | Unset): number - Maximum fundamental frequency in Hz. Example: 440.0
         patient_age (float | Unset): number - Patient age (integer). Example: 35
         patient_gender (str | Unset): string - Human-readable gender label (e.g. "Female")
-        age_group (str | Unset): string - Age group label used for interpretation (e.g. "Young adult / Middle-aged")
-        presbylaryngis_risk (float | Unset): number - Age-related voice change risk flag (0 or 1). Example: 0
-        expected_f0_range (float | Unset): string - Gender-specific expected F0 range. Example: "150-350 Hz"
+        age_group (str | Unset): string - Age group label, informational only (e.g. "Young adult / Middle-aged")
+        presbylaryngis_risk (float | Unset): number - Flag set to 1 when age ≥ 65, informational only: the DSI is not
+            adjusted for age. Example: 0
+        expected_f0_range (str | Unset): string - Gender-specific expected F0 range. Example: "150-350 Hz"
     """
 
     dsi: float | Unset = UNSET
@@ -37,7 +37,7 @@ class GetCalculateDsiResponse200:
     patient_gender: str | Unset = UNSET
     age_group: str | Unset = UNSET
     presbylaryngis_risk: float | Unset = UNSET
-    expected_f0_range: float | Unset = UNSET
+    expected_f0_range: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

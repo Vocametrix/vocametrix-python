@@ -17,7 +17,7 @@ class GetCalculateSzRatioResponse200:
     Attributes:
         s_phonation_time (float | Unset): Total sustained /s/ phonation duration in seconds. Example: 18.7
         z_phonation_time (float | Unset): Total sustained /z/ phonation duration in seconds. Example: 19.2
-        sz_ratio (str | Unset): S/Z phonation time ratio (primary clinical measure). Example: 0.97
+        sz_ratio (float | Unset): S/Z phonation time ratio (primary clinical measure). Example: 0.97
         s_efficiency (float | Unset): Percentage of /s/ recording with actual phonation. Example: 85.4
         z_efficiency (float | Unset): Percentage of /z/ recording with actual phonation. Example: 87.2
         s_phonation_segments (float | Unset): Number of continuous /s/ phonation segments. Example: 3
@@ -26,17 +26,19 @@ class GetCalculateSzRatioResponse200:
         z_longest_segment (float | Unset): /z/ longest continuous segment duration in seconds. Example: 15.8
         mean_f0_z (float | Unset): Mean fundamental frequency during /z/ phonation in Hz. Example: 195.8
         f0_std_z (float | Unset): Standard deviation of F0 during /z/ phonation in Hz. Example: 8.3
-        f0_cv_z (str | Unset): Coefficient of variation of F0 during /z/ in %. Example: 4.2
+        f0_cv_z (float | Unset): Coefficient of variation of F0 during /z/ in %. Example: 4.2
         reliability_score (float | Unset): Composite reliability score (0-4). Example: 3.8
-        presbylaryngis_risk (str | Unset): Age-related voice changes risk (0/1). Example: 0
-        sz_interpretation (str | Unset): Clinical classification with age adjustment. Example: "Normal S/Z ratio"
+        presbylaryngis_risk (int | Unset): Age flag (0/1), informational only: to our knowledge, no validated age-
+            specific S/Z cut-off exists. Example: 0
+        sz_interpretation (str | Unset): Text label for the ratio; only the 1.4 cut-off has a published source (Eckel &
+            Boone 1981). Example: "Normal S/Z ratio"
         clinical_significance (str | Unset): Pathophysiology interpretation. Example: "No evidence of vocal fold mass
             lesions"
         risk_level (str | Unset): Stratified risk assessment. Example: "Low"
         reliability (str | Unset): Test reliability classification. Example: "High reliability"
         age_adjustment (str | Unset): Age-specific interpretation note. Example: "No age-related adjustments needed"
         gender (str | Unset): Gender classification. Example: "Female"
-        patient_age (str | Unset): Patient age in years. Example: 35
+        patient_age (int | Unset): Patient age in years. Example: 35
         patient_gender (str | Unset): Patient gender classification. Example: "Female"
         age_group (str | Unset): Age-based clinical grouping. Example: "Young Adult"
         age_note (str | Unset): Age-related clinical note. Example: "Age within normal vocal range"
@@ -47,7 +49,7 @@ class GetCalculateSzRatioResponse200:
 
     s_phonation_time: float | Unset = UNSET
     z_phonation_time: float | Unset = UNSET
-    sz_ratio: str | Unset = UNSET
+    sz_ratio: float | Unset = UNSET
     s_efficiency: float | Unset = UNSET
     z_efficiency: float | Unset = UNSET
     s_phonation_segments: float | Unset = UNSET
@@ -56,16 +58,16 @@ class GetCalculateSzRatioResponse200:
     z_longest_segment: float | Unset = UNSET
     mean_f0_z: float | Unset = UNSET
     f0_std_z: float | Unset = UNSET
-    f0_cv_z: str | Unset = UNSET
+    f0_cv_z: float | Unset = UNSET
     reliability_score: float | Unset = UNSET
-    presbylaryngis_risk: str | Unset = UNSET
+    presbylaryngis_risk: int | Unset = UNSET
     sz_interpretation: str | Unset = UNSET
     clinical_significance: str | Unset = UNSET
     risk_level: str | Unset = UNSET
     reliability: str | Unset = UNSET
     age_adjustment: str | Unset = UNSET
     gender: str | Unset = UNSET
-    patient_age: str | Unset = UNSET
+    patient_age: int | Unset = UNSET
     patient_gender: str | Unset = UNSET
     age_group: str | Unset = UNSET
     age_note: str | Unset = UNSET

@@ -16,7 +16,8 @@ class GetCalculateAvqiResponse200:
     """
     Attributes:
         avqi (float | Unset): Acoustic Voice Quality Index - final composite score (0-10 scale, dimensionless). Values
-            above language-specific threshold indicate potential voice pathology
+            above the language-specific cut-off indicate probable dysphonia; to our knowledge, no validated severity bands
+            exist
         cpps (str | Unset): Smoothed Cepstral Peak Prominence measuring harmonic structure (dB). Higher values indicate
             better periodicity and voice quality
         hnr (str | Unset): Mean Harmonics-to-Noise Ratio across concatenated CS+SV signal (dB). Higher values indicate
@@ -25,10 +26,10 @@ class GetCalculateAvqiResponse200:
             more stable amplitude control
         shimmer_d_b (str | Unset): Period-to-period amplitude variation in logarithmic scale (dB). Lower values indicate
             better amplitude stability
-        ltas_slope (float | Unset): Spectral slope between 0-1kHz and 1-10kHz frequency ranges (dB/octave). More
-            negative values indicate steeper spectral roll-off
-        ltas_tilt (str | Unset): Spectral tilt of trend line through long-term average spectrum 1-10kHz (dB/octave).
-            Indicates overall spectral balance and voice quality
+        ltas_slope (float | Unset): Spectral slope between 0-1kHz and 1-10kHz frequency ranges (dB). More negative
+            values indicate steeper spectral roll-off
+        ltas_tilt (str | Unset): Spectral tilt of trend line through long-term average spectrum 1-10kHz (dB). Indicates
+            overall spectral balance and voice quality
     """
 
     avqi: float | Unset = UNSET

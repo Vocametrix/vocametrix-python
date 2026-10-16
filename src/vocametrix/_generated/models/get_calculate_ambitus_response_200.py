@@ -28,7 +28,7 @@ class GetCalculateAmbitusResponse200:
         age_group (str | Unset): Age category (Child/Adolescent/Adult)
         pitch_floor (float | Unset): Lower limit for pitch tracking in Hz
         pitch_ceiling (float | Unset): Upper limit for pitch tracking in Hz
-        analysis_method (str | Unset): Analysis technique used (Voice Range Profile)
+        analysis_method (str | Unset): Analysis technique used (vocal range, F0 only)
     """
 
     ambitus_semitones: str | Unset = UNSET

@@ -20,68 +20,68 @@ class GetJitterShimmerResponse200:
         recording_quality_warning (str | Unset): Detailed warning message if quality is suboptimal or poor. Empty string
             if good. Example: "CAUTION: Recording level is low (<-25 dBFS). Consider re-recording with slightly higher
             volume for more reliable results."
-        mean_intensity_dbfs (str | Unset): Mean recording intensity in dBFS (decibels relative to full scale). Target
+        mean_intensity_dbfs (float | Unset): Mean recording intensity in dBFS (decibels relative to full scale). Target
             range: -25 to -10 dBFS. Example: -18.3
         rms_amplitude (float | Unset): Root-mean-square amplitude (0-1 scale). Used to calculate dBFS. Example: 0.122
-        jitter_local_percent (str | Unset): Local jitter (period-to-period variation) in percent. Primary jitter
-            measure. Normal: ≤1.04%. Example: 0.85
-        jitter_ppq5_percent (str | Unset): 5-period perturbation quotient in percent. Smoothed jitter over 5 periods.
+        jitter_local_percent (float | Unset): Local jitter (period-to-period variation) in percent. Primary jitter
+            measure. MDVP reference: 1.04% (not validated for Praat). Example: 0.85
+        jitter_ppq5_percent (float | Unset): 5-period perturbation quotient in percent. Smoothed jitter over 5 periods.
             Example: 0.78
-        jitter_rap_percent (str | Unset): Relative average perturbation in percent. Average over 3 consecutive periods.
-            Example: 0.82
-        jitter_ddp_percent (str | Unset): Difference of differences of periods in percent. Sensitive to small
+        jitter_rap_percent (float | Unset): Relative average perturbation in percent. Average over 3 consecutive
+            periods. Example: 0.82
+        jitter_ddp_percent (float | Unset): Difference of differences of periods in percent. Sensitive to small
             perturbations. Example: 1.23
-        shimmer_local_percent (str | Unset): Local shimmer (peak-to-peak amplitude variation) in percent. Primary
-            shimmer measure. Normal: ≤3.81%. Example: 2.45
-        shimmer_local_db (str | Unset): Local shimmer in decibels. Logarithmic amplitude perturbation. Example: 0.215
-        shimmer_apq3_percent (str | Unset): 3-period amplitude perturbation quotient in percent. Short-term shimmer.
+        shimmer_local_percent (float | Unset): Local shimmer (peak-to-peak amplitude variation) in percent. Primary
+            shimmer measure. MDVP reference: 3.81% (not validated for Praat). Example: 2.45
+        shimmer_local_db (float | Unset): Local shimmer in decibels. Logarithmic amplitude perturbation. Example: 0.215
+        shimmer_apq3_percent (float | Unset): 3-period amplitude perturbation quotient in percent. Short-term shimmer.
             Example: 2.31
-        shimmer_apq5_percent (str | Unset): 5-period amplitude perturbation quotient in percent. Medium-term shimmer.
+        shimmer_apq5_percent (float | Unset): 5-period amplitude perturbation quotient in percent. Medium-term shimmer.
             Example: 2.38
-        shimmer_apq11_percent (str | Unset): 11-period amplitude perturbation quotient in percent. Long-term shimmer
+        shimmer_apq11_percent (float | Unset): 11-period amplitude perturbation quotient in percent. Long-term shimmer
             trends. Example: 2.52
-        shimmer_dda_percent (str | Unset): Difference of differences of amplitudes in percent. Sensitive to amplitude
+        shimmer_dda_percent (float | Unset): Difference of differences of amplitudes in percent. Sensitive to amplitude
             changes. Example: 3.47
         mean_f0 (float | Unset): Mean fundamental frequency in Hz. Averaged across voiced segments. Example: 185.7
         f0_std (float | Unset): Standard deviation of F0 in Hz. Pitch variability indicator. Example: 7.2
-        f0_cv (str | Unset): Coefficient of variation of F0 in percent. (F0_STD / MEAN_F0) × 100. Pitch stability
+        f0_cv (float | Unset): Coefficient of variation of F0 in percent. (F0_STD / MEAN_F0) × 100. Pitch stability
             metric. Example: 3.88
         voiceless_percent (float | Unset): Percentage of voiceless (unvoiced) frames. Indicates phonation breaks.
             Example: 5.2
         number_of_periods (float | Unset): Number of vocal fold vibration periods analyzed. Minimum 20 required, 100+
             optimal. Example: 245
-        insufficient_periods (str | Unset): Flag indicating insufficient periods: 1 if <100 periods (reduced
+        insufficient_periods (int | Unset): Flag indicating insufficient periods: 1 if <100 periods (reduced
             reliability), 0 if ≥100 periods. Example: 0
-        jitter_severity (str | Unset): Jitter classification: "Normal" (≤1.04%) or "Elevated" (>1.04%). Example:
-            "Normal"
-        shimmer_severity (str | Unset): Shimmer classification: "Normal" (≤3.81%) or "Elevated" (>3.81%). Example:
-            "Normal"
-        jitter_interpretation (str | Unset): Clinical interpretation text for jitter results. Example: "Within normal
-            limits (≤1.04%)"
-        shimmer_interpretation (str | Unset): Clinical interpretation text for shimmer results. Example: "Within normal
-            limits (≤3.81%)"
+        jitter_severity (str | Unset): Flag against the MDVP reference (not validated for Praat): "Normal" (≤1.04%) or
+            "Elevated" (>1.04%). Example: "Normal"
+        shimmer_severity (str | Unset): Flag against the MDVP reference (not validated for Praat): "Normal" (≤3.81%) or
+            "Elevated" (>3.81%). Example: "Normal"
+        jitter_interpretation (str | Unset): Interpretation text for jitter results. Example: "At or below MDVP
+            reference (1.04 %), not validated for Praat"
+        shimmer_interpretation (str | Unset): Interpretation text for shimmer results. Example: "At or below MDVP
+            reference (3.81 %), not validated for Praat"
     """
 
     recording_quality: str | Unset = UNSET
     recording_quality_warning: str | Unset = UNSET
-    mean_intensity_dbfs: str | Unset = UNSET
+    mean_intensity_dbfs: float | Unset = UNSET
     rms_amplitude: float | Unset = UNSET
-    jitter_local_percent: str | Unset = UNSET
-    jitter_ppq5_percent: str | Unset = UNSET
-    jitter_rap_percent: str | Unset = UNSET
-    jitter_ddp_percent: str | Unset = UNSET
-    shimmer_local_percent: str | Unset = UNSET
-    shimmer_local_db: str | Unset = UNSET
-    shimmer_apq3_percent: str | Unset = UNSET
-    shimmer_apq5_percent: str | Unset = UNSET
-    shimmer_apq11_percent: str | Unset = UNSET
-    shimmer_dda_percent: str | Unset = UNSET
+    jitter_local_percent: float | Unset = UNSET
+    jitter_ppq5_percent: float | Unset = UNSET
+    jitter_rap_percent: float | Unset = UNSET
+    jitter_ddp_percent: float | Unset = UNSET
+    shimmer_local_percent: float | Unset = UNSET
+    shimmer_local_db: float | Unset = UNSET
+    shimmer_apq3_percent: float | Unset = UNSET
+    shimmer_apq5_percent: float | Unset = UNSET
+    shimmer_apq11_percent: float | Unset = UNSET
+    shimmer_dda_percent: float | Unset = UNSET
     mean_f0: float | Unset = UNSET
     f0_std: float | Unset = UNSET
-    f0_cv: str | Unset = UNSET
+    f0_cv: float | Unset = UNSET
     voiceless_percent: float | Unset = UNSET
     number_of_periods: float | Unset = UNSET
-    insufficient_periods: str | Unset = UNSET
+    insufficient_periods: int | Unset = UNSET
     jitter_severity: str | Unset = UNSET
     shimmer_severity: str | Unset = UNSET
     jitter_interpretation: str | Unset = UNSET

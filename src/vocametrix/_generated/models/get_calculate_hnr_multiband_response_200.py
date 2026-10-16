@@ -19,27 +19,31 @@ class GetCalculateHnrMultibandResponse200:
         hnr_low (float | Unset): Low-frequency HNR (80-500 Hz) in dB. Example: 18.2
         hnr_mid (float | Unset): Mid-frequency HNR (500-1500 Hz) in dB. Example: 16.8
         hnr_high (float | Unset): High-frequency HNR (1500-3500 Hz) in dB. Example: 12.3
-        mean_f0 (float | Unset): Mean fundamental frequency in Hz. Example: 195.4
-        f0_std (str | Unset): Standard deviation of F0. Example: 8.5
+        mean_f0 (float | Unset): Mean fundamental frequency in Hz, null if pitch detection fails. Example: 195.4
+        f0_std (float | Unset): Standard deviation of F0. Example: 8.5
         gender (str | Unset): Gender classification result. Example: "Female"
         noise_ratio_low (float | Unset): Low-frequency noise percentage. Example: 12.5
         noise_ratio_mid (float | Unset): Mid-frequency noise percentage. Example: 18.2
         noise_ratio_high (float | Unset): High-frequency noise percentage. Example: 25.7
         hnr_slope (float | Unset): Spectral tilt across frequency bands. Example: -0.68
-        overall_quality (str | Unset): Clinical voice quality assessment. Example: "Good voice quality"
-        severity (str | Unset): Voice quality severity classification. Example: "Normal"
-        noise_pattern (float | Unset): Dominant noise pattern classification. Example: "Low-frequency emphasis"
-        breathiness (str | Unset): Breathiness assessment. Example: "Minimal breathiness"
-        patient_age (str | Unset): Patient age used in analysis. Example: 35
+        overall_quality (str | Unset): Not classified, with reference norms. Example: "Not classified (no validated
+            cutoff to our knowledge). Norms for sustained /a/ about 21-24.5 dB (Banh 2009)"
+        severity (str | Unset): No severity classification (no validated cutoff to our knowledge). Example: "Not
+            classified (no validated cutoff to our knowledge)"
+        noise_pattern (str | Unset): Dominant noise pattern classification. Example: "Distributed noise pattern"
+        breathiness (str | Unset): No breathiness classification (no validated cutoff for band HNR, to our knowledge).
+            Example: "Not classified (no validated cutoff for band HNR, to our knowledge)"
+        patient_age (int | Unset): Patient age used in analysis. Example: 35
         patient_gender (str | Unset): Patient gender classification. Example: "Female"
-        age_group (str | Unset): Age group classification. Example: "Young Adult"
-        age_note (str | Unset): Age-related clinical note. Example: "Age within normal vocal range"
+        age_group (str | Unset): Age group classification. Example: "Young adult (18-44)"
+        age_note (str | Unset): Age-related note (context only). Example: "Adult voice patterns expected"
         f0_note (str | Unset): F0 validation note. Example: "F0 within expected range for gender/age"
-        gender_note (str | Unset): Gender-specific note. Example: "Female vocal characteristics confirmed"
-        expected_f0_min (str | Unset): Expected minimum F0 for age/gender. Example: 165.4
-        expected_f0_max (str | Unset): Expected maximum F0 for age/gender. Example: 294.3
-        hnr_adjustment (str | Unset): Age-based threshold adjustment applied. Example: 0.8
-        adjusted_hnr_full (str | Unset): Age-adjusted full-spectrum HNR. Example: 16.2
+        gender_note (str | Unset): Gender-specific note. Example: "F0 consistent with reported gender"
+        expected_f0_min (float | Unset): Expected minimum F0 for age/gender. Example: 165.4
+        expected_f0_max (float | Unset): Expected maximum F0 for age/gender. Example: 294.3
+        hnr_adjustment (int | Unset): Always 0 (no age adjustment), kept for API compatibility. Example: 0
+        adjusted_hnr_full (float | Unset): Equal to HNR_FULL (no age adjustment), kept for API compatibility. Example:
+            15.4
     """
 
     hnr_full: float | Unset = UNSET
@@ -47,7 +51,7 @@ class GetCalculateHnrMultibandResponse200:
     hnr_mid: float | Unset = UNSET
     hnr_high: float | Unset = UNSET
     mean_f0: float | Unset = UNSET
-    f0_std: str | Unset = UNSET
+    f0_std: float | Unset = UNSET
     gender: str | Unset = UNSET
     noise_ratio_low: float | Unset = UNSET
     noise_ratio_mid: float | Unset = UNSET
@@ -55,18 +59,18 @@ class GetCalculateHnrMultibandResponse200:
     hnr_slope: float | Unset = UNSET
     overall_quality: str | Unset = UNSET
     severity: str | Unset = UNSET
-    noise_pattern: float | Unset = UNSET
+    noise_pattern: str | Unset = UNSET
     breathiness: str | Unset = UNSET
-    patient_age: str | Unset = UNSET
+    patient_age: int | Unset = UNSET
     patient_gender: str | Unset = UNSET
     age_group: str | Unset = UNSET
     age_note: str | Unset = UNSET
     f0_note: str | Unset = UNSET
     gender_note: str | Unset = UNSET
-    expected_f0_min: str | Unset = UNSET
-    expected_f0_max: str | Unset = UNSET
-    hnr_adjustment: str | Unset = UNSET
-    adjusted_hnr_full: str | Unset = UNSET
+    expected_f0_min: float | Unset = UNSET
+    expected_f0_max: float | Unset = UNSET
+    hnr_adjustment: int | Unset = UNSET
+    adjusted_hnr_full: float | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

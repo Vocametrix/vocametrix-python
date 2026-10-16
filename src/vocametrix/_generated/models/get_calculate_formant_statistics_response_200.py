@@ -17,25 +17,25 @@ class GetCalculateFormantStatisticsResponse200:
     Attributes:
         f1_mean (float | Unset): Mean first formant frequency in Hz. Example: 685.4
         f1_std (float | Unset): F1 standard deviation in Hz. Example: 45.2
-        f1_cv (str | Unset): F1 coefficient of variation in %. Example: 6.6
+        f1_cv (float | Unset): F1 coefficient of variation in %. Example: 6.6
         f1_median (float | Unset): F1 median frequency in Hz. Example: 682.1
         f1_iqr (float | Unset): F1 interquartile range in Hz. Example: 38.7
         f1_range (float | Unset): F1 frequency range in Hz. Example: 142.5
         f2_mean (float | Unset): Mean second formant frequency in Hz. Example: 1247.8
         f2_std (float | Unset): F2 standard deviation in Hz. Example: 78.3
-        f2_cv (str | Unset): F2 coefficient of variation in %. Example: 6.3
+        f2_cv (float | Unset): F2 coefficient of variation in %. Example: 6.3
         f2_median (float | Unset): F2 median frequency in Hz. Example: 1245.6
         f2_iqr (float | Unset): F2 interquartile range in Hz. Example: 65.1
         f2_range (float | Unset): F2 frequency range in Hz. Example: 234.8
         f3_mean (float | Unset): Mean third formant frequency in Hz. Example: 2856.1
         f3_std (float | Unset): F3 standard deviation in Hz. Example: 112.4
-        f3_cv (str | Unset): F3 coefficient of variation in %. Example: 3.9
+        f3_cv (float | Unset): F3 coefficient of variation in %. Example: 3.9
         f3_median (float | Unset): F3 median frequency in Hz. Example: 2851.7
         f3_iqr (float | Unset): F3 interquartile range in Hz. Example: 89.3
         f3_range (float | Unset): F3 frequency range in Hz. Example: 387.2
         f4_mean (float | Unset): Mean fourth formant frequency in Hz. Example: 3847.5
         f4_std (float | Unset): F4 standard deviation in Hz. Example: 145.7
-        f4_cv (str | Unset): F4 coefficient of variation in %. Example: 3.8
+        f4_cv (float | Unset): F4 coefficient of variation in %. Example: 3.8
         f4_median (float | Unset): F4 median frequency in Hz. Example: 3842.9
         f4_iqr (float | Unset): F4 interquartile range in Hz. Example: 123.8
         f4_range (float | Unset): F4 frequency range in Hz. Example: 512.6
@@ -43,45 +43,45 @@ class GetCalculateFormantStatisticsResponse200:
         f3_f2_diff (float | Unset): F3-F2 frequency difference in Hz. Example: 1608.3
         f4_f3_diff (float | Unset): F4-F3 frequency difference in Hz. Example: 991.4
         vowel_space_distance (float | Unset): Distance from neutral vowel in Hz. Example: 234.6
-        formant_stability_index (float | Unset): Articulatory consistency (0-100). Example: 87.3
+        formant_stability_index (float | Unset): Mean coefficient of variation of F1-F3, in %; lower means more stable.
+            Example: 5.8
         articulatory_precision (str | Unset): Clinical precision level. Example: "Good articulatory precision"
         precision_level (str | Unset): Severity classification. Example: "Normal precision"
         vowel_quality (str | Unset): Gender-specific assessment. Example: "Normal female vowel production"
-        hypernasality_risk (str | Unset): Hypernasality screening. Example: "Low risk"
         gender (str | Unset): Gender classification. Example: "Female"
         voice_pattern (str | Unset): Clinical pattern assessment. Example: "Normal formant pattern"
-        patient_age (str | Unset): Patient age in years. Example: 35
+        patient_age (int | Unset): Patient age in years. Example: 35
         patient_gender (str | Unset): Patient gender classification. Example: "Female"
         age_group (str | Unset): Age-based grouping. Example: "Young Adult"
         age_note (str | Unset): Age-related clinical note. Example: "Age within normal vocal range"
         gender_formant_note (str | Unset): Gender-specific formant note. Example: "Formant frequencies consistent with
             female anatomy"
-        expected_f1_range (float | Unset): Expected F1 range for demographics. Example: "650-720 Hz"
-        expected_f2_range (float | Unset): Expected F2 range for demographics. Example: "1200-1300 Hz"
-        expected_f3_range (float | Unset): Expected F3 range for demographics. Example: "2800-2900 Hz"
+        expected_f1_range (str | Unset): Expected F1 range for demographics. Example: "650-720 Hz"
+        expected_f2_range (str | Unset): Expected F2 range for demographics. Example: "1200-1300 Hz"
+        expected_f3_range (str | Unset): Expected F3 range for demographics. Example: "2800-2900 Hz"
     """
 
     f1_mean: float | Unset = UNSET
     f1_std: float | Unset = UNSET
-    f1_cv: str | Unset = UNSET
+    f1_cv: float | Unset = UNSET
     f1_median: float | Unset = UNSET
     f1_iqr: float | Unset = UNSET
     f1_range: float | Unset = UNSET
     f2_mean: float | Unset = UNSET
     f2_std: float | Unset = UNSET
-    f2_cv: str | Unset = UNSET
+    f2_cv: float | Unset = UNSET
     f2_median: float | Unset = UNSET
     f2_iqr: float | Unset = UNSET
     f2_range: float | Unset = UNSET
     f3_mean: float | Unset = UNSET
     f3_std: float | Unset = UNSET
-    f3_cv: str | Unset = UNSET
+    f3_cv: float | Unset = UNSET
     f3_median: float | Unset = UNSET
     f3_iqr: float | Unset = UNSET
     f3_range: float | Unset = UNSET
     f4_mean: float | Unset = UNSET
     f4_std: float | Unset = UNSET
-    f4_cv: str | Unset = UNSET
+    f4_cv: float | Unset = UNSET
     f4_median: float | Unset = UNSET
     f4_iqr: float | Unset = UNSET
     f4_range: float | Unset = UNSET
@@ -93,17 +93,16 @@ class GetCalculateFormantStatisticsResponse200:
     articulatory_precision: str | Unset = UNSET
     precision_level: str | Unset = UNSET
     vowel_quality: str | Unset = UNSET
-    hypernasality_risk: str | Unset = UNSET
     gender: str | Unset = UNSET
     voice_pattern: str | Unset = UNSET
-    patient_age: str | Unset = UNSET
+    patient_age: int | Unset = UNSET
     patient_gender: str | Unset = UNSET
     age_group: str | Unset = UNSET
     age_note: str | Unset = UNSET
     gender_formant_note: str | Unset = UNSET
-    expected_f1_range: float | Unset = UNSET
-    expected_f2_range: float | Unset = UNSET
-    expected_f3_range: float | Unset = UNSET
+    expected_f1_range: str | Unset = UNSET
+    expected_f2_range: str | Unset = UNSET
+    expected_f3_range: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -170,8 +169,6 @@ class GetCalculateFormantStatisticsResponse200:
         precision_level = self.precision_level
 
         vowel_quality = self.vowel_quality
-
-        hypernasality_risk = self.hypernasality_risk
 
         gender = self.gender
 
@@ -260,8 +257,6 @@ class GetCalculateFormantStatisticsResponse200:
             field_dict["PRECISION_LEVEL"] = precision_level
         if vowel_quality is not UNSET:
             field_dict["VOWEL_QUALITY"] = vowel_quality
-        if hypernasality_risk is not UNSET:
-            field_dict["HYPERNASALITY_RISK"] = hypernasality_risk
         if gender is not UNSET:
             field_dict["GENDER"] = gender
         if voice_pattern is not UNSET:
@@ -352,8 +347,6 @@ class GetCalculateFormantStatisticsResponse200:
 
         vowel_quality = d.pop("VOWEL_QUALITY", UNSET)
 
-        hypernasality_risk = d.pop("HYPERNASALITY_RISK", UNSET)
-
         gender = d.pop("GENDER", UNSET)
 
         voice_pattern = d.pop("VOICE_PATTERN", UNSET)
@@ -407,7 +400,6 @@ class GetCalculateFormantStatisticsResponse200:
             articulatory_precision=articulatory_precision,
             precision_level=precision_level,
             vowel_quality=vowel_quality,
-            hypernasality_risk=hypernasality_risk,
             gender=gender,
             voice_pattern=voice_pattern,
             patient_age=patient_age,
