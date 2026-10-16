@@ -28,10 +28,13 @@ jobs:
         id: version
         run: |
           python - << 'PYEOF'
-          import re, os
+          import re, os, subprocess
           content = open("pyproject.toml").read()
           m = re.search(r'(version = ")(\d+\.\d+\.)(\d+)(")', content)
-          new_ver = m.group(2) + str(int(m.group(3)) + 1)
+          current = m.group(2) + m.group(3)
+          # A version set by hand (no tag yet, e.g. a minor bump) is published as is.
+          tagged = subprocess.run(["git", "tag", "-l", f"v{current}"], capture_output=True, text=True).stdout.strip()
+          new_ver = m.group(2) + str(int(m.group(3)) + 1) if tagged else current
           new_content = re.sub(
               r'(version = ")\d+\.\d+\.\d+(")',
               rf'\g<1>{new_ver}\2',
@@ -59,7 +62,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add pyproject.toml
-          git commit -m "chore: bump version to ${{ steps.version.outputs.version }}"
+          git diff --cached --quiet || git commit -m "chore: bump version to ${{ steps.version.outputs.version }}"
           git tag "v${{ steps.version.outputs.version }}"
           git push origin master
           git push origin "v${{ steps.version.outputs.version }}"
