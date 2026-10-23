@@ -36,9 +36,9 @@ from vocametrix import VocametrixClient
 
 client = VocametrixClient()  # reads VOCAMETRIX_API_KEY from environment
 
-# AVQI — clinically validated dysphonia score (Maryn & Weenink 2015)
-result = client.avqi.calculate(sustained_vowel="vowel.wav")
-print(result["AVQI"])    # e.g. 1.8 → normal (threshold: 2.97)
+# AVQI v03.01: a sustained vowel plus a connected speech recording
+result = client.avqi.calculate(sustained_vowel="vowel.wav", connected_speech="speech.wav")
+print(result["AVQI"])    # the cut-off depends on the language and text read
 print(result["CPP"], result["HNR25"])
 ```
 
@@ -97,11 +97,13 @@ for word in result.get("words", []):
 ```python
 import pathlib
 
-for wav in pathlib.Path("./recordings").glob("*.wav"):
-    result = client.avqi.calculate(sustained_vowel=str(wav))
-    avqi = result["AVQI"]
-    label = "Normal" if avqi < 2.97 else "Dysphonic"
-    print(f"{wav.name}: AVQI={avqi:.2f}  ({label})")
+# Each patient folder holds vowel.wav and speech.wav
+for patient in pathlib.Path("./recordings").iterdir():
+    result = client.avqi.calculate(
+        sustained_vowel=str(patient / "vowel.wav"),
+        connected_speech=str(patient / "speech.wav"),
+    )
+    print(f"{patient.name}: AVQI={result['AVQI']:.2f}")
 ```
 
 ### Async transcription with SSE
@@ -141,7 +143,7 @@ from vocametrix.exceptions import (
 )
 
 try:
-    result = client.avqi.calculate(sustained_vowel="vowel.wav")
+    result = client.avqi.calculate(sustained_vowel="vowel.wav", connected_speech="speech.wav")
 except VocametrixRateLimitError as e:
     print(f"Rate limited. Retry after {e.retry_after}s")
 except VocametrixAuthError:

@@ -52,7 +52,7 @@ def test_avqi_calculate_sends_correct_requests(tmp_path, client):
         return_value=httpx.Response(200, json={"AVQI": 1.8, "CPP": 12.3})
     )
 
-    result = client.avqi.calculate(sustained_vowel=str(wav))
+    result = client.avqi.calculate(sustained_vowel=str(wav), connected_speech=str(wav))
     assert result["AVQI"] == 1.8
     assert result["CPP"] == 12.3
 
@@ -133,7 +133,7 @@ def test_retry_on_429(tmp_path, client):
     _http.time.sleep = lambda s: None
 
     try:
-        result = client.dsi.calculate(sustained_vowel=str(wav))
+        result = client.dsi.calculate(sustained_vowel=str(wav), mpt=15.0, maximum_f0=440, minimum_intensity=50, age=35, gender=1)
         assert result["DSI"] == 3.1
         assert call_count == 3
     finally:
@@ -155,7 +155,7 @@ def test_auth_error_not_retried(tmp_path, client):
     respx.post(f"{BASE}/api/assignFileId").mock(side_effect=auth_fail)
 
     with pytest.raises(VocametrixAuthError):
-        client.dsi.calculate(sustained_vowel=str(wav))
+        client.dsi.calculate(sustained_vowel=str(wav), mpt=15.0, maximum_f0=440, minimum_intensity=50, age=35, gender=1)
 
     assert call_count == 1  # not retried
 
@@ -218,7 +218,7 @@ def test_client_email_not_sent_in_uploads(tmp_path):
         return_value=httpx.Response(200, json={"AVQI": 1.5})
     )
 
-    client.avqi.calculate(sustained_vowel=str(wav))
+    client.avqi.calculate(sustained_vowel=str(wav), connected_speech=str(wav))
     client.close()
 
     assert "value" not in captured_email
@@ -245,7 +245,7 @@ def test_per_call_email_not_sent_in_uploads(tmp_path):
         return_value=httpx.Response(200, json={"DSI": 2.0})
     )
 
-    client.dsi.calculate(sustained_vowel=str(wav), email="override@example.com")
+    client.dsi.calculate(sustained_vowel=str(wav), mpt=15.0, maximum_f0=440, minimum_intensity=50, age=35, gender=1, email="override@example.com")
     client.close()
 
     assert "value" not in captured_email
@@ -265,7 +265,7 @@ async def test_async_client_avqi_calculate(tmp_path):
     )
 
     async with AsyncVocametrixClient(api_key="test-key") as client:
-        result = await client.avqi.calculate(sustained_vowel=str(wav))
+        result = await client.avqi.calculate(sustained_vowel=str(wav), connected_speech=str(wav))
 
     assert result["AVQI"] == 3.5
 
@@ -333,7 +333,7 @@ def test_default_client_sends_no_email(tmp_path):
         return_value=httpx.Response(200, json={"AVQI": 1.0})
     )
     with VocametrixClient(api_key="key") as c:
-        c.avqi.calculate(sustained_vowel=str(wav))
+        c.avqi.calculate(sustained_vowel=str(wav), connected_speech=str(wav))
 
     assert "email" not in captured
 
@@ -376,7 +376,7 @@ async def test_async_client_uses_real_async_http(tmp_path):
 
     async with AsyncVocametrixClient(api_key="key") as client:
         assert isinstance(client._http, httpx.AsyncClient)
-        result = await client.avqi.calculate(sustained_vowel=str(wav))
+        result = await client.avqi.calculate(sustained_vowel=str(wav), connected_speech=str(wav))
 
     assert result["AVQI"] == 2.2
 
@@ -411,7 +411,7 @@ def test_avqi_returns_typed_result(tmp_path):
     )
 
     with VocametrixClient(api_key="key") as c:
-        result = c.avqi.calculate(sustained_vowel=str(wav))
+        result = c.avqi.calculate(sustained_vowel=str(wav), connected_speech=str(wav))
 
     avqi_val: float = result["AVQI"]
     assert avqi_val == 1.8

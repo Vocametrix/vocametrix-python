@@ -70,15 +70,15 @@ class AvqiNamespace:
     def calculate(
         self,
         sustained_vowel: AudioInput,
-        connected_speech: Optional[AudioInput] = None,
+        connected_speech: AudioInput,
+        version: str = "v03.01",
         email: Optional[str] = None,
     ) -> AvqiResult:
+        """AVQI from a sustained vowel and connected speech; version is "v03.01" or "v02.03"."""
         effective_email = email if email is not None else self._default_email
         sv_id = upload_assign_file_id(self._c, self._base, sustained_vowel, effective_email)
-        params: Dict[str, str] = {"svFileId": sv_id}
-        if connected_speech is not None:
-            cs_id = upload_assign_file_id(self._c, self._base, connected_speech, effective_email)
-            params["csFileId"] = cs_id
+        cs_id = upload_assign_file_id(self._c, self._base, connected_speech, effective_email)
+        params: Dict[str, str] = {"svFileId": sv_id, "csFileId": cs_id, "version": version}
         resp = request_with_retry(self._c, "GET", f"{self._base}/api/calculate-avqi", params=params)
         return resp.json()
 
@@ -89,10 +89,30 @@ class DsiNamespace:
         self._base = base_url
         self._default_email = default_email
 
-    def calculate(self, sustained_vowel: AudioInput, email: Optional[str] = None) -> DsiResult:
+    def calculate(
+        self,
+        sustained_vowel: AudioInput,
+        mpt: float,
+        maximum_f0: float,
+        minimum_intensity: float,
+        age: int,
+        gender: int,
+        email: Optional[str] = None,
+    ) -> DsiResult:
+        """
+        DSI. mpt: maximum phonation time (s); maximum_f0: highest F0 (Hz);
+        minimum_intensity: softest intensity (dB SPL, needs a calibrated measurement);
+        gender: 1 male, 2 female, 3 other.
+        """
         effective_email = email if email is not None else self._default_email
         sv_id = upload_assign_file_id(self._c, self._base, sustained_vowel, effective_email)
-        resp = request_with_retry(self._c, "GET", f"{self._base}/api/calculate-dsi", params={"svFileId": sv_id})
+        resp = request_with_retry(
+            self._c, "GET", f"{self._base}/api/calculate-dsi",
+            params={
+                "svFileId": sv_id, "mpt": mpt, "maximumF0": maximum_f0,
+                "minimumIntensity": minimum_intensity, "age": age, "gender": gender,
+            },
+        )
         return resp.json()
 
 
@@ -118,6 +138,7 @@ class HnrNamespace:
     def calculate(
         self,
         sustained_vowel: AudioInput,
+        age: int,
         gender: int = 1,
         email: Optional[str] = None,
     ) -> HnrResult:
@@ -125,7 +146,7 @@ class HnrNamespace:
         sv_id = upload_assign_file_id(self._c, self._base, sustained_vowel, effective_email)
         resp = request_with_retry(
             self._c, "GET", f"{self._base}/api/calculate-hnr-multiband",
-            params={"svFileId": sv_id, "gender": gender},
+            params={"svFileId": sv_id, "age": age, "gender": gender},
         )
         return resp.json()
 
@@ -202,7 +223,7 @@ class TranscriptionNamespace:
         blob_url = upload_blob_url(self._c, self._base, audio)
         resp = request_with_retry(
             self._c, "POST", f"{self._base}/api/offline-speech-to-text",
-            json={"blobUrl": blob_url, "locale": locale},
+            json={"blobURL": blob_url, "locale": locale},
         )
         transcription_id: str = resp.json()["transcriptionId"]
 
@@ -226,9 +247,9 @@ class TtsNamespace:
         locale: str = "en-US",
         voice_name: Optional[str] = None,
     ) -> TtsResult:
-        body: Dict[str, Any] = {"text": text, "locale": locale}
+        body: Dict[str, Any] = {"text": text, "language": locale}
         if voice_name:
-            body["voiceName"] = voice_name
+            body["voice"] = voice_name
         resp = request_with_retry(self._c, "POST", f"{self._base}/api/text-to-speech", json=body)
         return resp.json()
 
@@ -242,13 +263,14 @@ class PhonemeNamespace:
     def detect(
         self,
         audio: AudioInput,
-        language: str = "fr",
+        language: str = "fr-FR",
         email: Optional[str] = None,
     ) -> PhonemeResult:
+        """Phoneme detection; language is "fr-FR" or "et-EE"."""
         effective_email = email if email is not None else self._default_email
         file_id = upload_assign_file_id(self._c, self._base, audio, effective_email)
         resp = request_with_retry(
-            self._c, "POST", f"{self._base}/api/classify-phoneme",
+            self._c, "POST", f"{self._base}/api/analyze-phonemes-live",
             json={"fileId": file_id, "language": language},
         )
         return resp.json()
@@ -326,11 +348,11 @@ class ProsodyNamespace:
         email: Optional[str] = None,
     ) -> ProsodySimilarityResult:
         effective_email = email if email is not None else self._default_email
-        sv_id = upload_assign_file_id(self._c, self._base, model, effective_email)
-        cs_id = upload_assign_file_id(self._c, self._base, learner, effective_email)
+        model_id = upload_assign_file_id(self._c, self._base, model, effective_email)
+        user_id = upload_assign_file_id(self._c, self._base, learner, effective_email)
         resp = request_with_retry(
             self._c, "GET", f"{self._base}/api/calculate-prosody-similarity",
-            params={"svFileId": sv_id, "csFileId": cs_id},
+            params={"modelFileId": model_id, "userFileId": user_id},
         )
         return resp.json()
 
@@ -346,7 +368,7 @@ class EgemapsNamespace:
         file_id = upload_assign_file_id(self._c, self._base, audio, effective_email)
         resp = request_with_retry(
             self._c, "GET", f"{self._base}/api/gemaps-extract",
-            params={"svFileId": file_id},
+            params={"fileId": file_id},
         )
         return resp.json()
 
@@ -359,7 +381,7 @@ class SoundLevelNamespace:
     def measure(
         self,
         audio: AudioInput,
-        start_sec: float = 0.0,
+        start_sec: float = 0.001,
         end_sec: Optional[float] = None,
     ) -> SoundLevelResult:
         if start_sec == 0.0:
@@ -370,9 +392,11 @@ class SoundLevelNamespace:
             )
 
         blob_url = upload_blob_url(self._c, self._base, audio)
-        body: Dict[str, Any] = {"blobURL": blob_url, "start_sec": start_sec}
-        if end_sec is not None:
-            body["end_sec"] = end_sec
+        # stop_sec is required; a value past the end of the file means "to the end".
+        body: Dict[str, Any] = {
+            "blobUrl": blob_url, "start_sec": start_sec,
+            "stop_sec": end_sec if end_sec is not None else 999999,
+        }
         resp = request_with_retry(self._c, "POST", f"{self._base}/api/soundLevel", json=body)
         return resp.json()
 
@@ -406,31 +430,34 @@ class AdvancedVoiceAnalysisNamespace:
     def calculate_spectral(
         self,
         sustained_vowel: AudioInput,
+        age: int,
         gender: int = 1,
         email: Optional[str] = None,
     ) -> SpectralResult:
-        """Advanced spectral measures (H1H2, H2H4, H4H2kHz, etc.)."""
+        """Advanced spectral measures (spectral moments, alpha ratio, LTAS slope and tilt)."""
         effective_email = email if email is not None else self._default_email
         sv_id = upload_assign_file_id(self._c, self._base, sustained_vowel, effective_email)
         resp = request_with_retry(
             self._c, "GET", f"{self._base}/api/calculate-spectral-advanced",
-            params={"svFileId": sv_id, "gender": gender},
+            params={"svFileId": sv_id, "age": age, "gender": gender},
         )
         return resp.json()
 
     def calculate_sz_ratio(
         self,
-        sustained_vowel: AudioInput,
-        connected_speech: AudioInput,
+        sustained_s: AudioInput,
+        sustained_z: AudioInput,
+        patient_age: int,
+        gender: int = 1,
         email: Optional[str] = None,
     ) -> SzRatioResult:
-        """S/Z ratio: sustained /s/ vs /z/ duration, a screening tool for vocal pathology."""
+        """S/Z ratio: longest sustained /s/ divided by longest sustained /z/."""
         effective_email = email if email is not None else self._default_email
-        sv_id = upload_assign_file_id(self._c, self._base, sustained_vowel, effective_email)
-        cs_id = upload_assign_file_id(self._c, self._base, connected_speech, effective_email)
+        s_id = upload_assign_file_id(self._c, self._base, sustained_s, effective_email)
+        z_id = upload_assign_file_id(self._c, self._base, sustained_z, effective_email)
         resp = request_with_retry(
             self._c, "GET", f"{self._base}/api/calculate-sz-ratio",
-            params={"svFileId": sv_id, "csFileId": cs_id},
+            params={"sFileId": s_id, "zFileId": z_id, "patientAge": patient_age, "gender": gender},
         )
         return resp.json()
 
@@ -451,43 +478,48 @@ class AdvancedVoiceAnalysisNamespace:
     def calculate_formant_statistics(
         self,
         sustained_vowel: AudioInput,
+        age: int,
         gender: int = 1,
         email: Optional[str] = None,
     ) -> FormantStatisticsResult:
-        """Formant statistics (F1, F2, F3 means and ranges)."""
+        """Formant statistics (F1 to F4 means and ranges)."""
         effective_email = email if email is not None else self._default_email
         sv_id = upload_assign_file_id(self._c, self._base, sustained_vowel, effective_email)
         resp = request_with_retry(
             self._c, "GET", f"{self._base}/api/calculate-formant-statistics",
-            params={"svFileId": sv_id, "gender": gender},
+            params={"svFileId": sv_id, "age": age, "gender": gender},
         )
         return resp.json()
 
     def calculate_abi(
         self,
         sustained_vowel: AudioInput,
+        connected_speech: AudioInput,
         email: Optional[str] = None,
     ) -> AbiResult:
-        """ABI: Acoustic Breathiness Index."""
+        """ABI: Acoustic Breathiness Index, from a sustained vowel and connected speech."""
         effective_email = email if email is not None else self._default_email
         sv_id = upload_assign_file_id(self._c, self._base, sustained_vowel, effective_email)
+        cs_id = upload_assign_file_id(self._c, self._base, connected_speech, effective_email)
         resp = request_with_retry(
             self._c, "GET", f"{self._base}/api/calculate-abi",
-            params={"svFileId": sv_id},
+            params={"svFileId": sv_id, "csFileId": cs_id},
         )
         return resp.json()
 
     def calculate_voice_dynamics(
         self,
         sustained_vowel: AudioInput,
+        age: int,
+        gender: int = 1,
         email: Optional[str] = None,
     ) -> VoiceDynamicsResult:
-        """Voice dynamics: perturbation measures over time."""
+        """Voice dynamics: intensity statistics and pitch-intensity correlation (relative dB)."""
         effective_email = email if email is not None else self._default_email
         sv_id = upload_assign_file_id(self._c, self._base, sustained_vowel, effective_email)
         resp = request_with_retry(
             self._c, "GET", f"{self._base}/api/calculate-voice-dynamics",
-            params={"svFileId": sv_id},
+            params={"svFileId": sv_id, "age": age, "gender": gender},
         )
         return resp.json()
 
