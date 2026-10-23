@@ -45,6 +45,11 @@ from ._response_types import (
 )
 
 
+def transcript_text(transcript: Dict[str, Any]) -> Optional[str]:
+    phrases = transcript.get("combinedRecognizedPhrases") or [{}]
+    return phrases[0].get("display")
+
+
 @dataclass
 class TranscriptionEvent:
     status: str
@@ -54,7 +59,9 @@ class TranscriptionEvent:
 
     @property
     def is_terminal_success(self) -> bool:
-        return self.status.lower() == "succeeded"
+        # A progress event already says "Succeeded"; the real end is the
+        # "complete" event that follows, the only one carrying contentUrl.
+        return isinstance(self.raw.get("contentUrl"), str)
 
     @property
     def is_terminal_failure(self) -> bool:
@@ -228,12 +235,18 @@ class TranscriptionNamespace:
         transcription_id: str = resp.json()["transcriptionId"]
 
         for payload in sse_stream(self._base, transcription_id, self._key):
-            yield TranscriptionEvent(
+            event = TranscriptionEvent(
                 status=payload.get("status", ""),
                 progress=payload.get("progress"),
                 display_text=payload.get("displayText"),
                 raw=payload,
             )
+            if event.is_terminal_success:
+                # The terminal event links to the Azure transcript JSON; the text is there.
+                transcript = httpx.get(payload["contentUrl"], timeout=60.0).json()
+                event.status = "Succeeded"
+                event.display_text = transcript_text(transcript)
+            yield event
 
 
 class TtsNamespace:

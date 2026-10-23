@@ -339,11 +339,45 @@ def test_default_client_sends_no_email(tmp_path):
 
 
 
-def test_transcription_event_terminal_success_is_case_insensitive():
+def test_transcription_event_terminal_success_is_the_content_url_event():
+    # The server sends a progress event saying "Succeeded" before the
+    # "complete" event, which has no status and carries contentUrl.
     from vocametrix import TranscriptionEvent
-    for status in ("Succeeded", "succeeded", "SUCCEEDED", "sUcCeEdEd"):
-        e = TranscriptionEvent(status=status, progress=1.0, display_text=None, raw={})
-        assert e.is_terminal_success, f"Expected is_terminal_success for status={status!r}"
+    progress = TranscriptionEvent(
+        status="Succeeded", progress=1.0, display_text=None, raw={"status": "Succeeded"}
+    )
+    complete = TranscriptionEvent(
+        status="", progress=None, display_text=None, raw={"contentUrl": "https://az/t.json"}
+    )
+    assert not progress.is_terminal_success
+    assert complete.is_terminal_success
+
+
+@respx.mock
+def test_transcription_stream_returns_the_transcript_text(tmp_path, client, monkeypatch):
+    wav = tmp_path / "speech.wav"
+    wav.write_bytes(b"RIFF" + b"\x00" * 40)
+    urls = {"uploadURL": "https://az.example.com/put", "blobURL": "https://az.example.com/blob"}
+    respx.post(f"{BASE}/api/get-blob-url").mock(return_value=httpx.Response(200, json=urls))
+    respx.put("https://az.example.com/put").mock(return_value=httpx.Response(201))
+    respx.post(f"{BASE}/api/offline-speech-to-text").mock(
+        return_value=httpx.Response(200, json={"transcriptionId": "t1"})
+    )
+    respx.get("https://az.example.com/t.json").mock(
+        return_value=httpx.Response(
+            200, json={"combinedRecognizedPhrases": [{"display": "Bonjour."}]}
+        )
+    )
+    events = [
+        {"status": "Succeeded"},
+        {"message": "done", "contentUrl": "https://az.example.com/t.json"},
+    ]
+    monkeypatch.setattr("vocametrix._namespaces.sse_stream", lambda *args: iter(events))
+
+    out = list(client.transcription.stream(str(wav), locale="fr-FR"))
+    assert [e.is_terminal_success for e in out] == [False, True]
+    assert out[1].display_text == "Bonjour."
+    assert out[1].status == "Succeeded"
 
 
 def test_transcription_event_terminal_failure_is_case_insensitive():

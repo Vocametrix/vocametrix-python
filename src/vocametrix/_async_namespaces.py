@@ -13,7 +13,7 @@ from ._http import (
     upload_blob_url_async,
     sse_stream_async,
 )
-from ._namespaces import TranscriptionEvent
+from ._namespaces import TranscriptionEvent, transcript_text
 from ._response_types import (
     AbiResult,
     AvqiResult,
@@ -166,12 +166,18 @@ class AsyncTranscriptionNamespace:
         )
         transcription_id: str = resp.json()["transcriptionId"]
         async for payload in sse_stream_async(self._base, transcription_id, self._key):
-            yield TranscriptionEvent(
+            event = TranscriptionEvent(
                 status=payload.get("status", ""),
                 progress=payload.get("progress"),
                 display_text=payload.get("displayText"),
                 raw=payload,
             )
+            if event.is_terminal_success:
+                async with httpx.AsyncClient(timeout=60.0) as http:
+                    transcript = (await http.get(payload["contentUrl"])).json()
+                event.status = "Succeeded"
+                event.display_text = transcript_text(transcript)
+            yield event
 
 
 class AsyncTtsNamespace:
