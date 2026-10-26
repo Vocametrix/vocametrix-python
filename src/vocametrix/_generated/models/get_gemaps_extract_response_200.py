@@ -12,11 +12,14 @@ if TYPE_CHECKING:
     from ..models.get_gemaps_extract_response_200_chunk_info import (
         GetGemapsExtractResponse200ChunkInfo,
     )
+    from ..models.get_gemaps_extract_response_200_combined_features import (
+        GetGemapsExtractResponse200CombinedFeatures,
+    )
+    from ..models.get_gemaps_extract_response_200_features import (
+        GetGemapsExtractResponse200Features,
+    )
     from ..models.get_gemaps_extract_response_200_metadata import (
         GetGemapsExtractResponse200Metadata,
-    )
-    from ..models.get_gemaps_extract_response_200e_ge_map_sv_02_features import (
-        GetGemapsExtractResponse200EGeMAPSv02Features,
     )
 
 
@@ -27,11 +30,13 @@ T = TypeVar("T", bound="GetGemapsExtractResponse200")
 class GetGemapsExtractResponse200:
     """
     Attributes:
-        e_ge_map_sv_02_features (GetGemapsExtractResponse200EGeMAPSv02Features | Unset): The full eGeMAPSv02 feature
-            object (88 features) as emitted by openSMILE — feature names follow the openSMILE convention (e.g.
-            F0semitoneFrom27.5Hz_sma3nz_amean, loudness_sma3_amean, jitterLocal_sma3nz_amean, shimmerLocaldB_sma3nz_amean,
-            HNRdBACF_sma3nz_amean, F1frequency_sma3nz_amean, etc.). Refer to the openSMILE eGeMAPSv02 configuration for the
-            canonical key list — this server is a transparent wrapper around it.
+        features (GetGemapsExtractResponse200Features | Unset): Object (files up to 8 s) of GeMAPS v01b functionals as
+            emitted by openSMILE (e.g. F0semitoneFrom27.5Hz_sma3nz_amean, loudness_sma3_amean, jitterLocal_sma3nz_amean,
+            shimmerLocaldB_sma3nz_amean, HNRdBACF_sma3nz_amean, F1frequency_sma3nz_amean), plus speech_percentage and
+            silence_percentage. feature_count gives the number of keys. Refer to the openSMILE GeMAPSv01b configuration for
+            the canonical list.
+        combined_features (GetGemapsExtractResponse200CombinedFeatures | Unset): Object (files over 8 s) with one entry
+            per feature: `{ mean, min, max, std, median, count }` across chunks; the per-chunk results are in `chunks`.
         chunk_info (GetGemapsExtractResponse200ChunkInfo | Unset): Object describing chunking: `{ total_chunks: number,
             current_chunk: number, start_time: number, duration: number, is_chunked: boolean }`. For files ≤ 8 s, is_chunked
             is false and the whole file produces one result.
@@ -39,15 +44,20 @@ class GetGemapsExtractResponse200:
             number, analysis_type: "single_chunk" | "chunked" }`.
     """
 
-    e_ge_map_sv_02_features: GetGemapsExtractResponse200EGeMAPSv02Features | Unset = UNSET
+    features: GetGemapsExtractResponse200Features | Unset = UNSET
+    combined_features: GetGemapsExtractResponse200CombinedFeatures | Unset = UNSET
     chunk_info: GetGemapsExtractResponse200ChunkInfo | Unset = UNSET
     metadata: GetGemapsExtractResponse200Metadata | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        e_ge_map_sv_02_features: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.e_ge_map_sv_02_features, Unset):
-            e_ge_map_sv_02_features = self.e_ge_map_sv_02_features.to_dict()
+        features: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.features, Unset):
+            features = self.features.to_dict()
+
+        combined_features: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.combined_features, Unset):
+            combined_features = self.combined_features.to_dict()
 
         chunk_info: dict[str, Any] | Unset = UNSET
         if not isinstance(self.chunk_info, Unset):
@@ -60,8 +70,10 @@ class GetGemapsExtractResponse200:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if e_ge_map_sv_02_features is not UNSET:
-            field_dict["<eGeMAPSv02 features>"] = e_ge_map_sv_02_features
+        if features is not UNSET:
+            field_dict["features"] = features
+        if combined_features is not UNSET:
+            field_dict["combined_features"] = combined_features
         if chunk_info is not UNSET:
             field_dict["chunk_info"] = chunk_info
         if metadata is not UNSET:
@@ -74,21 +86,31 @@ class GetGemapsExtractResponse200:
         from ..models.get_gemaps_extract_response_200_chunk_info import (
             GetGemapsExtractResponse200ChunkInfo,
         )
+        from ..models.get_gemaps_extract_response_200_combined_features import (
+            GetGemapsExtractResponse200CombinedFeatures,
+        )
+        from ..models.get_gemaps_extract_response_200_features import (
+            GetGemapsExtractResponse200Features,
+        )
         from ..models.get_gemaps_extract_response_200_metadata import (
             GetGemapsExtractResponse200Metadata,
         )
-        from ..models.get_gemaps_extract_response_200e_ge_map_sv_02_features import (
-            GetGemapsExtractResponse200EGeMAPSv02Features,
-        )
 
         d = dict(src_dict)
-        _e_ge_map_sv_02_features = d.pop("<eGeMAPSv02 features>", UNSET)
-        e_ge_map_sv_02_features: GetGemapsExtractResponse200EGeMAPSv02Features | Unset
-        if isinstance(_e_ge_map_sv_02_features, Unset):
-            e_ge_map_sv_02_features = UNSET
+        _features = d.pop("features", UNSET)
+        features: GetGemapsExtractResponse200Features | Unset
+        if isinstance(_features, Unset):
+            features = UNSET
         else:
-            e_ge_map_sv_02_features = GetGemapsExtractResponse200EGeMAPSv02Features.from_dict(
-                _e_ge_map_sv_02_features
+            features = GetGemapsExtractResponse200Features.from_dict(_features)
+
+        _combined_features = d.pop("combined_features", UNSET)
+        combined_features: GetGemapsExtractResponse200CombinedFeatures | Unset
+        if isinstance(_combined_features, Unset):
+            combined_features = UNSET
+        else:
+            combined_features = GetGemapsExtractResponse200CombinedFeatures.from_dict(
+                _combined_features
             )
 
         _chunk_info = d.pop("chunk_info", UNSET)
@@ -106,7 +128,8 @@ class GetGemapsExtractResponse200:
             metadata = GetGemapsExtractResponse200Metadata.from_dict(_metadata)
 
         get_gemaps_extract_response_200 = cls(
-            e_ge_map_sv_02_features=e_ge_map_sv_02_features,
+            features=features,
+            combined_features=combined_features,
             chunk_info=chunk_info,
             metadata=metadata,
         )

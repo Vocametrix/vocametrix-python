@@ -75,8 +75,8 @@ def sync_detailed(
     client: AuthenticatedClient,
     file_id: str,
 ) -> Response[Any | GetGemapsExtractResponse200]:
-    """Extract the full openSMILE eGeMAPSv02 feature set (88 features) from a previously uploaded audio
-    file. Files longer t…
+    """Extract the openSMILE GeMAPS v01b feature set (62 features) from a previously uploaded audio file.
+    Files up to 8 seco…
 
     Args:
         file_id (str):
@@ -105,8 +105,8 @@ def sync(
     client: AuthenticatedClient,
     file_id: str,
 ) -> Any | GetGemapsExtractResponse200 | None:
-    """Extract the full openSMILE eGeMAPSv02 feature set (88 features) from a previously uploaded audio
-    file. Files longer t…
+    """Extract the openSMILE GeMAPS v01b feature set (62 features) from a previously uploaded audio file.
+    Files up to 8 seco…
 
     Args:
         file_id (str):
@@ -130,8 +130,8 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     file_id: str,
 ) -> Response[Any | GetGemapsExtractResponse200]:
-    """Extract the full openSMILE eGeMAPSv02 feature set (88 features) from a previously uploaded audio
-    file. Files longer t…
+    """Extract the openSMILE GeMAPS v01b feature set (62 features) from a previously uploaded audio file.
+    Files up to 8 seco…
 
     Args:
         file_id (str):
@@ -158,8 +158,8 @@ async def asyncio(
     client: AuthenticatedClient,
     file_id: str,
 ) -> Any | GetGemapsExtractResponse200 | None:
-    """Extract the full openSMILE eGeMAPSv02 feature set (88 features) from a previously uploaded audio
-    file. Files longer t…
+    """Extract the openSMILE GeMAPS v01b feature set (62 features) from a previously uploaded audio file.
+    Files up to 8 seco…
 
     Args:
         file_id (str):

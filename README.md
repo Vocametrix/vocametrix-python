@@ -76,6 +76,7 @@ Never hardcode API keys in source code. Use environment variables or a secrets m
 | `client.prosody` | Prosody similarity (model vs learner) |
 | `client.egemaps` | eGeMAPS 88-feature extraction |
 | `client.sound_level` | Sound level measurement (dB SPL) |
+| `client.advanced.measure_ddk` | Diadochokinesis (pa-ta-ka): syllable rate, regularity, acceleration, Pierce 2013 norms for 65-86 |
 
 ## Workflows
 

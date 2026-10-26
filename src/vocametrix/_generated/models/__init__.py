@@ -26,11 +26,15 @@ from .get_calculate_sz_ratio_response_200 import GetCalculateSzRatioResponse200
 from .get_calculate_voice_dynamics_response_200 import GetCalculateVoiceDynamicsResponse200
 from .get_gemaps_extract_response_200 import GetGemapsExtractResponse200
 from .get_gemaps_extract_response_200_chunk_info import GetGemapsExtractResponse200ChunkInfo
-from .get_gemaps_extract_response_200_metadata import GetGemapsExtractResponse200Metadata
-from .get_gemaps_extract_response_200e_ge_map_sv_02_features import (
-    GetGemapsExtractResponse200EGeMAPSv02Features,
+from .get_gemaps_extract_response_200_combined_features import (
+    GetGemapsExtractResponse200CombinedFeatures,
 )
+from .get_gemaps_extract_response_200_features import GetGemapsExtractResponse200Features
+from .get_gemaps_extract_response_200_metadata import GetGemapsExtractResponse200Metadata
 from .get_jitter_shimmer_response_200 import GetJitterShimmerResponse200
+from .get_measure_ddk_response_200 import GetMeasureDdkResponse200
+from .get_measure_ddk_response_200_norm import GetMeasureDdkResponse200Norm
+from .get_measure_ddk_response_200_onsets_s_item import GetMeasureDdkResponse200OnsetsSItem
 from .get_therapy_result_by_session_id_response_200 import GetTherapyResultBySessionIdResponse200
 from .get_therapy_status_by_session_id_response_200 import GetTherapyStatusBySessionIdResponse200
 from .get_therapy_status_by_session_id_response_200_generated_prompts_item import (
@@ -230,9 +234,13 @@ __all__ = (
     "GetCalculateVoiceDynamicsResponse200",
     "GetGemapsExtractResponse200",
     "GetGemapsExtractResponse200ChunkInfo",
-    "GetGemapsExtractResponse200EGeMAPSv02Features",
+    "GetGemapsExtractResponse200CombinedFeatures",
+    "GetGemapsExtractResponse200Features",
     "GetGemapsExtractResponse200Metadata",
     "GetJitterShimmerResponse200",
+    "GetMeasureDdkResponse200",
+    "GetMeasureDdkResponse200Norm",
+    "GetMeasureDdkResponse200OnsetsSItem",
     "GetTherapyResultBySessionIdResponse200",
     "GetTherapyStatusBySessionIdResponse200",
     "GetTherapyStatusBySessionIdResponse200GeneratedPromptsItem",

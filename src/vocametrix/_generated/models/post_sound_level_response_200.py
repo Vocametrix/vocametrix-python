@@ -16,8 +16,9 @@ class PostSoundLevelResponse200:
     """
     Attributes:
         sound_level (float | Unset): Number — dB value rounded to 2 decimals.
-        unit (str | Unset): String — currently "dB SPL".
-        frequency_range (float | Unset): String — currently "20-8000 Hz".
+        unit (str | Unset): String — "dB (uncalibrated)".
+        frequency_range (float | Unset): String — "20-<half the sampling rate> Hz", e.g. "20-24000 Hz" for a 48 kHz
+            file.
     """
 
     sound_level: float | Unset = UNSET

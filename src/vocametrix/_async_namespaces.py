@@ -33,6 +33,7 @@ from ._response_types import (
     SzRatioResult,
     TtsResult,
     VoiceDynamicsResult,
+    DdkResult,
     VrpResult,
 )
 
@@ -351,6 +352,17 @@ class AsyncAdvancedVoiceAnalysisNamespace:
         effective_email = email if email is not None else self._default_email
         sv_id = await upload_assign_file_id_async(self._c, self._base, sustained_vowel, effective_email)
         resp = await request_with_retry_async(self._c, "GET", f"{self._base}/api/calculate-voice-dynamics", params={"svFileId": sv_id, "age": age, "gender": gender})
+        return resp.json()
+
+    async def measure_ddk(self, audio: AudioInput, task: str, gender: Optional[str] = None, age: Optional[int] = None, email: Optional[str] = None) -> DdkResult:
+        effective_email = email if email is not None else self._default_email
+        file_id = await upload_assign_file_id_async(self._c, self._base, audio, effective_email)
+        params: Dict[str, Any] = {"fileId": file_id, "task": task}
+        if gender is not None:
+            params["gender"] = gender
+        if age is not None:
+            params["age"] = age
+        resp = await request_with_retry_async(self._c, "GET", f"{self._base}/api/measure-ddk", params=params)
         return resp.json()
 
 

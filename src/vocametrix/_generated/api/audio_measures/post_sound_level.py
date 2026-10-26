@@ -75,8 +75,8 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: PostSoundLevelBody,
 ) -> Response[Any | PostSoundLevelResponse200]:
-    """Measure the sound level (dB SPL) of an audio recording over a specified time window. Useful for
-    environmental noise c…
+    """Measure the sound level of an audio recording over a specified time window, in uncalibrated dB
+    (digital full scale ta…
 
     Args:
         body (PostSoundLevelBody):
@@ -105,8 +105,8 @@ def sync(
     client: AuthenticatedClient,
     body: PostSoundLevelBody,
 ) -> Any | PostSoundLevelResponse200 | None:
-    """Measure the sound level (dB SPL) of an audio recording over a specified time window. Useful for
-    environmental noise c…
+    """Measure the sound level of an audio recording over a specified time window, in uncalibrated dB
+    (digital full scale ta…
 
     Args:
         body (PostSoundLevelBody):
@@ -130,8 +130,8 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: PostSoundLevelBody,
 ) -> Response[Any | PostSoundLevelResponse200]:
-    """Measure the sound level (dB SPL) of an audio recording over a specified time window. Useful for
-    environmental noise c…
+    """Measure the sound level of an audio recording over a specified time window, in uncalibrated dB
+    (digital full scale ta…
 
     Args:
         body (PostSoundLevelBody):
@@ -158,8 +158,8 @@ async def asyncio(
     client: AuthenticatedClient,
     body: PostSoundLevelBody,
 ) -> Any | PostSoundLevelResponse200 | None:
-    """Measure the sound level (dB SPL) of an audio recording over a specified time window. Useful for
-    environmental noise c…
+    """Measure the sound level of an audio recording over a specified time window, in uncalibrated dB
+    (digital full scale ta…
 
     Args:
         body (PostSoundLevelBody):

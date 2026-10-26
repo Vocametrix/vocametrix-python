@@ -6,13 +6,13 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...types import UNSET, Response
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     transcription_id: str,
     *,
-    api_key: str,
+    api_key: str | Unset = UNSET,
 ) -> dict[str, Any]:
 
     params: dict[str, Any] = {}
@@ -76,14 +76,14 @@ def sync_detailed(
     transcription_id: str,
     *,
     client: AuthenticatedClient,
-    api_key: str,
+    api_key: str | Unset = UNSET,
 ) -> Response[Any | str]:
-    """Server-Sent Events (SSE) stream delivering transcription progress events and the final transcript.
-    The terminal event…
+    """Server-Sent Events (SSE) stream delivering transcription progress events and the final transcript. A
+    progress event w…
 
     Args:
         transcription_id (str):
-        api_key (str):
+        api_key (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -109,14 +109,14 @@ def sync(
     transcription_id: str,
     *,
     client: AuthenticatedClient,
-    api_key: str,
+    api_key: str | Unset = UNSET,
 ) -> Any | str | None:
-    """Server-Sent Events (SSE) stream delivering transcription progress events and the final transcript.
-    The terminal event…
+    """Server-Sent Events (SSE) stream delivering transcription progress events and the final transcript. A
+    progress event w…
 
     Args:
         transcription_id (str):
-        api_key (str):
+        api_key (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -137,14 +137,14 @@ async def asyncio_detailed(
     transcription_id: str,
     *,
     client: AuthenticatedClient,
-    api_key: str,
+    api_key: str | Unset = UNSET,
 ) -> Response[Any | str]:
-    """Server-Sent Events (SSE) stream delivering transcription progress events and the final transcript.
-    The terminal event…
+    """Server-Sent Events (SSE) stream delivering transcription progress events and the final transcript. A
+    progress event w…
 
     Args:
         transcription_id (str):
-        api_key (str):
+        api_key (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -168,14 +168,14 @@ async def asyncio(
     transcription_id: str,
     *,
     client: AuthenticatedClient,
-    api_key: str,
+    api_key: str | Unset = UNSET,
 ) -> Any | str | None:
-    """Server-Sent Events (SSE) stream delivering transcription progress events and the final transcript.
-    The terminal event…
+    """Server-Sent Events (SSE) stream delivering transcription progress events and the final transcript. A
+    progress event w…
 
     Args:
         transcription_id (str):
-        api_key (str):
+        api_key (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

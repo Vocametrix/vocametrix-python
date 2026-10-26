@@ -27,6 +27,7 @@ from ._namespaces import TranscriptionEvent
 from ._response_types import (
     AvqiResult,
     CppResult,
+    DdkResult,
     DsiResult,
     EgemapsResult,
     HnrResult,
@@ -57,6 +58,7 @@ __all__ = [
     "VocametrixValidationError",
     "AvqiResult",
     "CppResult",
+    "DdkResult",
     "DsiResult",
     "EgemapsResult",
     "HnrResult",

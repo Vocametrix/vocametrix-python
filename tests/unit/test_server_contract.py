@@ -97,6 +97,16 @@ def test_spectral_formants_dynamics_send_age_and_gender(client, wav):
 
 
 @respx.mock
+def test_ddk_sends_task_gender_age(client, wav):
+    mock_file_ids("d1", "d2")
+    route = respx.get(f"{BASE}/api/measure-ddk").mock(return_value=OK)
+    client.advanced.measure_ddk(wav, task="pataka", gender="male", age=70)
+    assert query_of(route) == {"fileId": "d1", "task": "pataka", "gender": "male", "age": "70"}
+    client.advanced.measure_ddk(wav, task="pa_steady")
+    assert query_of(route) == {"fileId": "d2", "task": "pa_steady"}
+
+
+@respx.mock
 def test_abi_sends_cs(client, wav):
     mock_file_ids("sv1", "cs1")
     route = respx.get(f"{BASE}/api/calculate-abi").mock(return_value=OK)

@@ -7,7 +7,7 @@ by input parameters and backend version.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, TypedDict
+from typing import Any, Dict, List, Optional, TypedDict
 
 
 class AvqiResult(TypedDict, total=False):
@@ -125,6 +125,27 @@ class FormantStatisticsResult(TypedDict, total=False):
 
 class AbiResult(TypedDict, total=False):
     ABI: float
+
+
+class DdkNorm(TypedDict):
+    source: str
+    mean: float
+    sd: float
+    min: float
+    max: float
+    z: float
+
+
+class DdkResult(TypedDict, total=False):
+    task: str
+    syllables: int
+    rate_first9: float
+    rate_overall: float
+    cov_percent: float
+    npvi: float
+    interval_slope_ms: float
+    norm: Optional[DdkNorm]
+    onsets_s: List[float]
 
 
 class VoiceDynamicsResult(TypedDict, total=False):
